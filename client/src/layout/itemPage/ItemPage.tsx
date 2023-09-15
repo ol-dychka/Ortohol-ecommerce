@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import {
   Box,
   Button,
+  ButtonGroup,
   IconButton,
   Typography,
   useMediaQuery,
@@ -13,14 +14,11 @@ import { observer } from "mobx-react-lite";
 import {
   AddOutlined,
   CheckOutlined,
-  FullscreenExitOutlined,
-  FullscreenOutlined,
-  NavigateBeforeOutlined,
-  NavigateNextOutlined,
   RemoveOutlined,
 } from "@mui/icons-material";
 import { CartItem } from "../../models/CartItem";
-import ImageGallery from "react-image-gallery";
+import ItemDetails from "./ItemDetails";
+import ItemImages from "./ItemImages";
 
 const ItemPage = () => {
   const {
@@ -39,6 +37,8 @@ const ItemPage = () => {
   const isMobile = useMediaQuery("(max-width:900px)");
 
   const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
 
   const handleQuantityChange = (updatedQuantity: number) => {
     if (updatedQuantity < 1) return;
@@ -46,14 +46,19 @@ const ItemPage = () => {
   };
 
   const handleAddToCart = () => {
-    console.log(item!.added);
-    updateCart(new CartItem(item!, quantity));
-    console.log(item!.added);
+    console.log(color);
+    console.log(size);
+    updateCart(new CartItem(item!, quantity, size, color));
   };
 
   useEffect(() => {
-    if (id) loadItem(id);
+    if (id)
+      loadItem(id).then(() => {
+        setSize(item!.sizes[0]);
+        setColor(item!.colors[0]);
+      });
     return () => clearSelectedItem();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, clearSelectedItem, loadItem]);
 
   if (loading || !item) return <div>loading...</div>;
@@ -65,71 +70,9 @@ const ItemPage = () => {
         gap="1rem"
         justifyContent="space-between"
       >
+        {/* IMAGE & DESCRIPTION */}
         <Box flexBasis={isMobile ? undefined : "50%"}>
-          <ImageGallery
-            items={item.images.map((image) => ({
-              original: image,
-              thumbnail: image,
-              thumbnailWidth: 30,
-              // thumbnailHeight: 50,
-            }))}
-            showPlayButton={false}
-            renderThumbInner={({ original }) => {
-              return <img src={original} alt="m" style={{ height: "3rem" }} />;
-            }}
-            renderLeftNav={(onClick) => {
-              return (
-                <IconButton
-                  onClick={onClick}
-                  sx={{
-                    position: "absolute",
-                    top: "45%",
-                    left: "0",
-                    zIndex: 5,
-                  }}
-                  color="secondary"
-                >
-                  <NavigateBeforeOutlined sx={{ fontSize: "2rem" }} />
-                </IconButton>
-              );
-            }}
-            renderRightNav={(onClick) => {
-              return (
-                <IconButton
-                  onClick={onClick}
-                  sx={{
-                    position: "absolute",
-                    top: "45%",
-                    right: "0",
-                    zIndex: 5,
-                  }}
-                  color="secondary"
-                >
-                  <NavigateNextOutlined sx={{ fontSize: "2rem" }} />
-                </IconButton>
-              );
-            }}
-            renderFullscreenButton={(onClick, isFullscreen) => {
-              return (
-                <IconButton
-                  onClick={onClick}
-                  sx={{
-                    position: "absolute",
-                    bottom: "0",
-                    right: "0",
-                    zIndex: 5,
-                  }}
-                  color="secondary"
-                >
-                  {isFullscreen ? (
-                    <FullscreenExitOutlined sx={{ fontSize: "2rem" }} />
-                  ) : (
-                    <FullscreenOutlined sx={{ fontSize: "2rem" }} />
-                  )}
-                </IconButton>
-              );
-            }}
-          />
+          <ItemImages images={item.images} />
         </Box>
         <Box flexBasis="45%" mb="2rem">
           <Typography variant="h2" fontWeight="500">
@@ -149,13 +92,46 @@ const ItemPage = () => {
               </Typography>
             </Box>
           ) : (
-            <Typography color="primary.main" fontWeight="700">
+            <Typography color="primary.main" fontWeight="700" variant="h3">
               {item.price}$
             </Typography>
           )}
-          <Box display="flex">
-            <CheckOutlined />
-            <Typography variant="h5">In Store</Typography>
+
+          {/* SIZE & COLOR CONFIG */}
+          <Box mt="1rem" />
+          <ButtonGroup>
+            {item.sizes.map((s) => (
+              <Button key={s} onClick={() => setSize(s)} disabled={s === size}>
+                {s}
+              </Button>
+            ))}
+          </ButtonGroup>
+          <Box />
+          <ButtonGroup sx={{ marginTop: "1rem" }}>
+            {item.colors.map((c) => (
+              <Button
+                key={c}
+                onClick={() => setColor(c)}
+                disabled={c === color}
+              >
+                {c}
+              </Button>
+            ))}
+          </ButtonGroup>
+
+          {/* CART MENU */}
+          <Box display="flex" mt="1rem">
+            {item.leftCount > 0 ? (
+              <>
+                <CheckOutlined />
+                <Typography variant="h5">In Store</Typography>
+                <Typography variant="h5" color="secondary.dark" ml="1rem">
+                  {item.leftCount} Remaining
+                </Typography>
+              </>
+            ) : (
+              <Typography variant="h5">Not In Store</Typography>
+            )}
           </Box>
           <Box
             display="flex"
@@ -173,11 +149,12 @@ const ItemPage = () => {
               <AddOutlined sx={{ fontSize: "1.5rem" }} />
             </IconButton>
           </Box>
-          <Box display="flex" gap="2rem">
+          <Box display="flex" gap="1rem">
             <Button
               color={item.added ? "error" : "primary"}
               variant="contained"
               onClick={handleAddToCart}
+              disabled={item.leftCount < 1}
             >
               {item.added ? "Remove from Cart" : "Add to Cart"}
             </Button>
@@ -189,6 +166,7 @@ const ItemPage = () => {
                   handleAddToCart();
                   openCart(true);
                 }}
+                disabled={item.leftCount < 1}
               >
                 Buy Now
               </Button>
@@ -198,6 +176,7 @@ const ItemPage = () => {
       </Box>
       <Box>
         <Typography variant="h5">{item.description}</Typography>
+        <ItemDetails details={item.details} />
       </Box>
     </Box>
   );

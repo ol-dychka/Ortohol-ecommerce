@@ -1,10 +1,20 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  MenuItem,
+  Select,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Item } from "../../models/Item";
 import FlexBetween from "../../reusable/FlexBetween";
 import {
   AddOutlined,
   CheckOutlined,
   FavoriteBorderOutlined,
+  KeyboardArrowDownOutlined,
+  KeyboardArrowUpOutlined,
   RemoveOutlined,
 } from "@mui/icons-material";
 import { useState } from "react";
@@ -23,6 +33,9 @@ const ItemCard = ({ item }: Props) => {
   } = useStore();
 
   const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState(item.sizes[0]);
+  const [color, setColor] = useState(item.colors[0]);
+  const [open, setOpen] = useState(false);
 
   const handleQuantityChange = (updatedQuantity: number) => {
     if (updatedQuantity < 1) return;
@@ -30,9 +43,7 @@ const ItemCard = ({ item }: Props) => {
   };
 
   const handleAddToCart = () => {
-    console.log(item.added);
-    updateCart(new CartItem(item, quantity));
-    console.log(item.added);
+    if (size && color) updateCart(new CartItem(item, quantity, size, color));
   };
 
   return (
@@ -64,7 +75,7 @@ const ItemCard = ({ item }: Props) => {
         </Typography>
         <Typography>{item.category}</Typography>
       </FlexBetween>
-      <FlexBetween flexDirection="column">
+      <FlexBetween flexDirection="column" position="relative">
         <FlexBetween>
           <CheckOutlined />
           <Typography>In Store</Typography>
@@ -87,6 +98,8 @@ const ItemCard = ({ item }: Props) => {
             {item.price}$
           </Typography>
         )}
+
+        {/* SIZE & COLOR SELECTION */}
         <Box
           display="flex"
           justifyContent="center"
@@ -96,14 +109,78 @@ const ItemCard = ({ item }: Props) => {
             opacity: item.added ? 0.5 : 1,
           }}
         >
-          <IconButton onClick={() => handleQuantityChange(quantity - 1)}>
-            <RemoveOutlined />
-          </IconButton>
-          <Typography>{quantity}</Typography>
-          <IconButton onClick={() => handleQuantityChange(quantity + 1)}>
-            <AddOutlined />
-          </IconButton>
+          {item.sizes.length > 1 || item.colors.length > 1 ? (
+            <>
+              <Typography>Select...</Typography>
+              <IconButton onClick={() => setOpen(!open)}>
+                {open ? (
+                  <KeyboardArrowUpOutlined />
+                ) : (
+                  <KeyboardArrowDownOutlined />
+                )}
+              </IconButton>
+            </>
+          ) : (
+            <>
+              <IconButton onClick={() => handleQuantityChange(quantity - 1)}>
+                <RemoveOutlined />
+              </IconButton>
+              <Typography>{quantity}</Typography>
+              <IconButton onClick={() => handleQuantityChange(quantity + 1)}>
+                <AddOutlined />
+              </IconButton>
+            </>
+          )}
         </Box>
+        <Box
+          position="absolute"
+          top="78px"
+          zIndex={10}
+          display={open ? "block" : "none"}
+          bgcolor="#fff"
+          boxShadow="0px 0px 10px #333333"
+          padding="0.25rem"
+        >
+          <FlexBetween gap="1rem">
+            <Typography>Size</Typography>
+            <Select
+              value={size}
+              onChange={(e) => setSize(e.target.value)}
+              variant="standard"
+            >
+              {item.sizes.map((s) => (
+                <MenuItem key={s} value={s}>
+                  {s}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
+          <FlexBetween gap="1rem">
+            <Typography>Color</Typography>
+            <Select
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              variant="standard"
+            >
+              {item.colors.map((c) => (
+                <MenuItem key={c} value={c}>
+                  {c}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
+          <FlexBetween>
+            <IconButton onClick={() => handleQuantityChange(quantity - 1)}>
+              <RemoveOutlined />
+            </IconButton>
+            <Typography>{quantity}</Typography>
+            <IconButton onClick={() => handleQuantityChange(quantity + 1)}>
+              <AddOutlined />
+            </IconButton>
+          </FlexBetween>
+        </Box>
+
+        {/* CART MENU */}
         <Button
           color={item.added ? "error" : "primary"}
           variant="contained"

@@ -111,6 +111,20 @@ export default class itemStore {
     });
   };
 
+  updateCartSize = (cartItem: CartItem, size: string) => {
+    this.cartRegistry.set(cartItem.item.id, {
+      ...cartItem,
+      size: size,
+    });
+  };
+
+  updateCartColor = (cartItem: CartItem, color: string) => {
+    this.cartRegistry.set(cartItem.item.id, {
+      ...cartItem,
+      color: color,
+    });
+  };
+
   openCart = (state: boolean) => {
     this.isOpen = state;
     this.wasOpened = true;

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Domain;
 
 namespace Persistence
@@ -12,6 +13,12 @@ namespace Persistence
                     new() {
                         Name = "Orthopedic chair",
                         Description = "Incidunt fringilla senectus ad! Leo dictumst, luctus facilis, class eius repellat nisl diamlorem, possimus in, mollis! Sagittis saepe dolor porttitor.",
+                        Details = JsonSerializer.Serialize(new {
+                            Material = new List<string>{"Cotton", "Plastic"},
+                            Country = "Ukraine"
+                        }),
+                        Sizes = new List<string>{"S", "M", "L", "XL" },
+                        Colors = new List<string>{ "black", "white", "red"},
                         Category = "Furniture",
                         Images = new List<Photo>{
                             new() {
@@ -25,10 +32,16 @@ namespace Persistence
                         },
                         Price = 9.99,
                         PriceSale = 7.99,
+                        LeftCount = 3,
                     },
                     new() {
                         Name = "Corset",
                         Description = "Incidunt fringilla senectus ad! Leo dictumst, luctus facilis, class eius repellat nisl diamlorem, possimus in, mollis! Sagittis saepe dolor porttitor.",
+                        Details = JsonSerializer.Serialize(new {
+                            Material = new List<string>{"Cotton", "Plastic"},
+                            Country = "Ukraine"
+                        }),                        Sizes = new List<string>{"S", "M", "L", "XL" },
+                        Colors = new List<string>{ "black", "white", "red"},
                         Category = "Wearing",
                         Images = new List<Photo>{
                             new() {
@@ -37,6 +50,7 @@ namespace Persistence
                             }
                         },
                         Price = 10.99,
+                        LeftCount = 10,
                     },
                 };
 
