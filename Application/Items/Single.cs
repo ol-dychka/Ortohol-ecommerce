@@ -9,11 +9,14 @@ using Persistence;
 
 namespace Application.Items
 {
-    public class List
+    public class Single
     {
-        public class Query : IRequest<Result<List<ItemDto>>> { }
+        public class Query : IRequest<Result<ItemDto>>
+        {
+            public Guid Id { get; set; }
+        }
 
-        public class Handler : IRequestHandler<Query, Result<List<ItemDto>>>
+        public class Handler : IRequestHandler<Query, Result<ItemDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -23,14 +26,10 @@ namespace Application.Items
                 _context = context;
             }
 
-            public async Task<Result<List<ItemDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<ItemDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var items = await _context.Items
-                    .Include(p => p.Images)
-                    .ProjectTo<ItemDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
-
-                return Result<List<ItemDto>>.Success(items);
+                var item = await _context.Items.ProjectTo<ItemDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(x => x.Id == request.Id);
+                return Result<ItemDto>.Success(item);
             }
         }
     }

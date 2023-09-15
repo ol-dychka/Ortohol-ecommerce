@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 import { themeSettings } from "../theme";
 import Footer from "./Footer";
-import CartMenu from "./CartMenu";
+import CartMenu from "./cart/CartMenu";
 
 function App() {
   const theme = createTheme(themeSettings());
@@ -12,7 +12,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Navbar />
-      <Box padding="0 3rem">
+      <Box padding="2rem 3rem">
         <Outlet />
       </Box>
       <CartMenu />

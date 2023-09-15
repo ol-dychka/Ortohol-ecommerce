@@ -16,6 +16,7 @@ const requests = {
 
 const Items = {
   list: () => requests.get<Item[]>("/items"),
+  single: (id: string) => requests.get<Item>(`/items/${id}`),
 };
 
 const api = {

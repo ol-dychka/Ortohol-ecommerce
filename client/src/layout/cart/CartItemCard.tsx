@@ -16,7 +16,7 @@ const CartItemCard = ({ cartItem }: Props) => {
   return (
     <FlexBetween>
       <img
-        src={cartItem.item.images[0] || "img-placeholder.png"}
+        src={cartItem.item.images[0] || "/img-placeholder.png"}
         alt="img"
         width="200px"
       />

@@ -10,5 +10,6 @@ namespace Persistence
         { }
 
         public DbSet<Item> Items { get; set; }
+        public DbSet<Photo> Photos { get; set; }
     }
 }

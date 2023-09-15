@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 import { StoreContext, store } from "./stores/store.ts";
 import { router } from "./layout/Routes.tsx";
 import { RouterProvider } from "react-router";

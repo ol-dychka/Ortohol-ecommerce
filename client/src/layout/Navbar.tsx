@@ -21,6 +21,7 @@ import FlexBetween from "../reusable/FlexBetween";
 import NavbarIconButton from "../reusable/NavbarIconButton";
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
+import { router } from "./Routes";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -45,6 +46,8 @@ const Navbar = () => {
           fontWeight="500"
           color="primary.main"
           margin={isMobile ? "1rem" : "2rem 4rem"}
+          onClick={() => router.navigate("/")}
+          sx={{ cursor: "pointer" }}
         >
           ORTOHALL
         </Typography>
@@ -171,11 +174,15 @@ const Navbar = () => {
                   <SearchOutlined />
                 </IconButton>
               </Box>
-              <StyledBadge badgeContent={3}>
+              <StyledBadge
+                badgeContent={cart.length}
+                color={wasOpened ? "secondary" : "error"}
+              >
                 <IconButton
                   sx={{
                     color: "primary.contrastText",
                   }}
+                  onClick={() => openCart(true)}
                 >
                   <ShoppingCartOutlined />
                 </IconButton>

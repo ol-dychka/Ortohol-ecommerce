@@ -5,18 +5,15 @@ import {
   ButtonGroup,
   Typography,
   useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import { useEffect } from "react";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
-import MessageWidget from "./MessageWidget";
+import MessageWidget from "../MessageWidget";
 import FlexBetween from "../../reusable/FlexBetween";
 import ItemCard from "./ItemCard";
 
 const ItemsDashboard = () => {
-  const theme = useTheme();
-
   const isMobile = useMediaQuery("(max-width:900px)");
 
   const {

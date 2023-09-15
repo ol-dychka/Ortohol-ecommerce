@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useStore } from "../../stores/store";
 import { CartItem } from "../../models/CartItem";
+import { router } from "../Routes";
 
 type Props = {
   item: Item;
@@ -44,7 +45,7 @@ const ItemCard = ({ item }: Props) => {
       <FlexBetween flexDirection="column">
         <FlexBetween flexDirection="column" position="relative">
           <img
-            src={item.images[0] || "img-placeholder.png"}
+            src={item.images[0] || "/img-placeholder.png"}
             alt="img"
             width="200px"
           />
@@ -54,7 +55,13 @@ const ItemCard = ({ item }: Props) => {
             </IconButton>
           </Box>
         </FlexBetween>
-        <Typography fontWeight="700">{item.name}</Typography>
+        <Typography
+          fontWeight="700"
+          onClick={() => router.navigate(`/items/${item.id}`)}
+          sx={{ cursor: "pointer" }}
+        >
+          {item.name}
+        </Typography>
         <Typography>{item.category}</Typography>
       </FlexBetween>
       <FlexBetween flexDirection="column">

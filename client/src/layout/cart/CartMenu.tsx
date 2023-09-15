@@ -1,11 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Box, Divider, IconButton, Typography } from "@mui/material";
-import { useStore } from "../stores/store";
+import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
-import FlexBetween from "../reusable/FlexBetween";
+import FlexBetween from "../../reusable/FlexBetween";
 import { CloseOutlined } from "@mui/icons-material";
 import { useCallback, useEffect } from "react";
-import CartItemCard from "./itemsDashboard/CartItemCard";
+import CartItemCard from "./CartItemCard";
 
 const CartMenu = () => {
   const {
