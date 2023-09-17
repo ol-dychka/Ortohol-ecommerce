@@ -53,10 +53,14 @@ const ItemPage = () => {
 
   useEffect(() => {
     if (id)
-      loadItem(id).then(() => {
-        setSize(item!.sizes[0]);
-        setColor(item!.colors[0]);
+      loadItem(id).then((item) => {
+        if (item) {
+          setSize(item.sizes[0]);
+          setColor(item.colors[0]);
+        }
       });
+    console.log(size);
+    console.log(color);
     return () => clearSelectedItem();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, clearSelectedItem, loadItem]);

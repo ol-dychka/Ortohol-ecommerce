@@ -2,6 +2,9 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { Item } from "../models/Item";
 import api from "../api";
 import { CartItem } from "../models/CartItem";
+import { CheckoutFormValues } from "../models/CheckoutFormValues";
+import { loadStripe } from "@stripe/stripe-js";
+import { Order, OrderItem } from "../models/OrderItem";
 
 export default class itemStore {
   itemRegistry = new Map<string, Item>();
@@ -43,7 +46,7 @@ export default class itemStore {
   loadItem = async (id: string) => {
     if (this.itemRegistry.has(id)) {
       this.selectedItem = this.itemRegistry.get(id);
-      return;
+      return this.selectedItem;
     }
     this.loading = true;
     try {
@@ -53,6 +56,7 @@ export default class itemStore {
         this.selectedItem = result;
         this.loading = false;
       });
+      return this.selectedItem;
     } catch (error) {
       console.log(error);
       runInAction(() => (this.loading = false));
@@ -128,5 +132,26 @@ export default class itemStore {
   openCart = (state: boolean) => {
     this.isOpen = state;
     this.wasOpened = true;
+  };
+
+  emptyCart = () => {
+    this.cartRegistry.clear();
+  };
+
+  makePayment = async (values: CheckoutFormValues) => {
+    // getting stripe public key
+    const stripe = await loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
+    // making new order to give to back-end
+    const order = new Order(
+      `${values.billingAddress.firstName} ${values.billingAddress.lastName}`,
+      values.email,
+      this.cart.map((cartItem) => new OrderItem(cartItem))
+    );
+    // making a call to back-end and getting back session key
+    await api.Items.order(order).then((session) =>
+      stripe?.redirectToCheckout({
+        sessionId: session.sessionId,
+      })
+    );
   };
 }

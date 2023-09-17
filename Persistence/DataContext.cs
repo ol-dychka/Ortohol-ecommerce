@@ -11,5 +11,7 @@ namespace Persistence
 
         public DbSet<Item> Items { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }

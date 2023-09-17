@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.DTOs;
 using Application.Items;
 using Domain;
@@ -17,6 +18,12 @@ namespace API.Controllers
         public async Task<ActionResult<ItemDto>> GetPost(Guid id)
         {
             return HandleResult(await Mediator.Send(new Application.Items.Single.Query { Id = id }));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<StripeCheckoutSessionResult>> Order(Domain.Order order)
+        {
+            return HandleResult(await Mediator.Send(new Application.Items.Order.Command { UserName = order.Username, Email = order.Email, Items = order.Items }));
         }
     }
 }

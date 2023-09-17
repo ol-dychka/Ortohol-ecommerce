@@ -1,11 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Box, Divider, IconButton, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import FlexBetween from "../../reusable/FlexBetween";
 import { CloseOutlined } from "@mui/icons-material";
 import { useCallback, useEffect } from "react";
 import CartItemCard from "./CartItemCard";
+import { router } from "../Routes";
 
 const CartMenu = () => {
   const {
@@ -74,10 +75,23 @@ const CartMenu = () => {
           <CartItemCard key={cartItem.item.id} cartItem={cartItem} />
         ))}
         <Divider />
-        <FlexBetween>
-          <Typography>Total:</Typography>
-          <Typography color="primary.main">{calculateTotal()}</Typography>
+        <FlexBetween mt="0.5rem" mb="1rem">
+          <Typography variant="h5">Total:</Typography>
+          <Typography variant="h5" color="primary.main">
+            {calculateTotal()}
+          </Typography>
         </FlexBetween>
+        {cart.length > 0 && (
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={() =>
+              router.navigate("/checkout").then(() => openCart(false))
+            }
+          >
+            Checkout
+          </Button>
+        )}
       </Box>
     </Box>
   );

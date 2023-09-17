@@ -3,6 +3,9 @@ import App from "./App";
 import { createBrowserRouter } from "react-router-dom";
 import ItemsDashboard from "./itemsDashboard/ItemsDashboard";
 import ItemPage from "./itemPage/ItemPage";
+import Checkout from "./checkout/Checkout";
+import Success from "./checkout/Success";
+import Failure from "./checkout/Failure";
 
 export const routes: RouteObject[] = [
   {
@@ -11,6 +14,9 @@ export const routes: RouteObject[] = [
     children: [
       { path: "/", element: <ItemsDashboard /> },
       { path: "/items/:id", element: <ItemPage /> },
+      { path: "/checkout", element: <Checkout /> },
+      { path: "/success", element: <Success /> },
+      { path: "/failure", element: <Failure /> },
     ],
   },
 ];

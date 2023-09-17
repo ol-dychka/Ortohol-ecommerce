@@ -2,6 +2,7 @@ using Application.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddCors(opt =>
 });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+StripeConfiguration.ApiKey = builder.Configuration.GetValue<string>("StripeApiKey");
 
 var app = builder.Build();
 
@@ -57,5 +59,6 @@ catch (Exception ex)
     logger.LogError(ex, "Error occured during migration");
     throw;
 }
+
 
 app.Run();
