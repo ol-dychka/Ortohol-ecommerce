@@ -22,6 +22,8 @@ import NavbarIconButton from "../reusable/NavbarIconButton";
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
 import { router } from "./Routes";
+import MobileMenu from "./navbarInfo/MobileMenu";
+import { useState } from "react";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -31,6 +33,12 @@ const Navbar = () => {
   } = useStore();
 
   const isMobile = useMediaQuery("(max-width:900px)");
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMobileMenuNavigate = (destination: string) => {
+    router.navigate(destination).then(() => setIsOpen(false));
+  };
 
   return (
     <Box zIndex={10} position="relative">
@@ -125,88 +133,116 @@ const Navbar = () => {
         )}
       </Box>
 
+      {/* MOBILE MENU */}
+      {isMobile && (
+        <MobileMenu
+          isOpen={isOpen}
+          handleNavigate={handleMobileMenuNavigate}
+          close={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* BOTTOM NAVBAR */}
       <Sticky>
-        <Box
-          bgcolor="primary.main"
-          display="flex"
-          alignItems="center"
-          gap="1rem"
-          padding="1.5rem 4rem"
-          sx={{
-            "& .MuiTypography-root": {
-              color: "primary.contrastText",
-              fontSize: "0.9rem",
-              fontWeight: "700",
-            },
-          }}
-        >
-          {isMobile ? (
-            <>
+        {isMobile ? (
+          <Box
+            bgcolor="primary.main"
+            display="flex"
+            alignItems="center"
+            gap="1rem"
+            padding="1.5rem 4rem"
+            sx={{
+              "& .MuiTypography-root": {
+                color: "primary.contrastText",
+                fontSize: "0.9rem",
+                fontWeight: "700",
+              },
+            }}
+          >
+            <IconButton
+              sx={{
+                color: "primary.contrastText",
+              }}
+              onClick={() => setIsOpen(true)}
+            >
+              <MenuOutlined />
+            </IconButton>
+            <Box
+              bgcolor="primary.light"
+              width="100%"
+              height="3rem"
+              borderRadius="1.75rem"
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              padding="0 0.25rem"
+            >
+              <Typography ml="1rem" color="secondary.dark">
+                Search
+              </Typography>
+              <IconButton
+                sx={{
+                  bgcolor: "primary.contrastText",
+                  "&:hover": {
+                    bgcolor: "secondary.main",
+                  },
+                  color: "primary.main",
+                }}
+              >
+                <SearchOutlined />
+              </IconButton>
+            </Box>
+            <StyledBadge
+              badgeContent={cart.length}
+              color={wasOpened ? "secondary" : "error"}
+            >
               <IconButton
                 sx={{
                   color: "primary.contrastText",
                 }}
+                onClick={() => openCart(true)}
               >
-                <MenuOutlined />
+                <ShoppingCartOutlined />
               </IconButton>
-              <Box
-                bgcolor="primary.light"
-                width="100%"
-                height="3rem"
-                borderRadius="1.75rem"
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                padding="0 0.25rem"
-              >
-                <Typography ml="1rem" color="secondary.dark">
-                  Search
-                </Typography>
-                <IconButton
-                  sx={{
-                    bgcolor: "primary.contrastText",
-                    "&:hover": {
-                      bgcolor: "secondary.main",
-                    },
-                    color: "primary.main",
-                  }}
-                >
-                  <SearchOutlined />
-                </IconButton>
-              </Box>
-              <StyledBadge
-                badgeContent={cart.length}
-                color={wasOpened ? "secondary" : "error"}
-              >
-                <IconButton
-                  sx={{
-                    color: "primary.contrastText",
-                  }}
-                  onClick={() => openCart(true)}
-                >
-                  <ShoppingCartOutlined />
-                </IconButton>
-              </StyledBadge>
-            </>
-          ) : (
-            <>
-              <FlexBetween>
-                <AppsOutlined sx={{ color: "primary.light" }} />
-                <Typography>Categories</Typography>
-              </FlexBetween>
-              <Divider
-                orientation="vertical"
-                sx={{ height: "1rem", bgcolor: "primary.contrastText" }}
-              />
-              <Typography>Main</Typography>
-              <Typography>Our Goods</Typography>
-              <Typography>Customer Information</Typography>
-              <Typography>Contact</Typography>
-              <Typography>Map</Typography>
-              <Typography>About Us</Typography>
-            </>
-          )}
-        </Box>
+            </StyledBadge>
+          </Box>
+        ) : (
+          <Box
+            bgcolor="primary.main"
+            display="flex"
+            alignItems="center"
+            gap="1rem"
+            padding="1.5rem 4rem"
+            sx={{
+              "& .MuiTypography-root": {
+                color: "primary.contrastText",
+                fontSize: "0.9rem",
+                fontWeight: "700",
+              },
+              "&:hover > .MuiTypography-root": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            <FlexBetween>
+              <AppsOutlined sx={{ color: "primary.light" }} />
+              <Typography>Categories</Typography>
+            </FlexBetween>
+            <Divider
+              orientation="vertical"
+              sx={{ height: "1rem", bgcolor: "primary.contrastText" }}
+            />
+            <Typography onClick={() => router.navigate("/")}>Main</Typography>
+            <Typography>Our Goods</Typography>
+            <Typography onClick={() => router.navigate("/customer-info")}>
+              Customer Information
+            </Typography>
+            <Typography onClick={() => router.navigate("/contact")}>
+              Contact
+            </Typography>
+            <Typography onClick={() => router.navigate("/map")}>Map</Typography>
+          </Box>
+        )}
       </Sticky>
     </Box>
   );

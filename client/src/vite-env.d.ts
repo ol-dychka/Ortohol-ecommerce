@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_PUBLISHABLE_KEY: string;
+  readonly VITE_GOOGLEMAPS_API_KEY: string;
   // more env variables...
 }
 

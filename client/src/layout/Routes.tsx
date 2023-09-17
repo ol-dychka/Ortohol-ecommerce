@@ -6,6 +6,9 @@ import ItemPage from "./itemPage/ItemPage";
 import Checkout from "./checkout/Checkout";
 import Success from "./checkout/Success";
 import Failure from "./checkout/Failure";
+import Map from "./navbarInfo/Map";
+import CustomerInformation from "./navbarInfo/CustomerInformation";
+import Contact from "./navbarInfo/Contact";
 
 export const routes: RouteObject[] = [
   {
@@ -17,6 +20,9 @@ export const routes: RouteObject[] = [
       { path: "/checkout", element: <Checkout /> },
       { path: "/success", element: <Success /> },
       { path: "/failure", element: <Failure /> },
+      { path: "/map", element: <Map /> },
+      { path: "/customer-info", element: <CustomerInformation /> },
+      { path: "/contact", element: <Contact /> },
     ],
   },
 ];
