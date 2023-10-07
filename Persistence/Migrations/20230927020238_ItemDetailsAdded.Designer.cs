@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -12,9 +13,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230927020238_ItemDetailsAdded")]
+    partial class ItemDetailsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,17 +38,11 @@ namespace Persistence.Migrations
                     b.Property<List<string>>("Colors")
                         .HasColumnType("text[]");
 
-                    b.Property<List<string>>("CompressionClasses")
-                        .HasColumnType("text[]");
-
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Details")
                         .HasColumnType("text");
-
-                    b.Property<List<string>>("Genders")
-                        .HasColumnType("text[]");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -62,6 +59,30 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("Domain.ItemDetails", b =>
+                {
+                    b.Property<string>("ItemId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ItemId1")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Left")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ItemId", "Size", "Color");
+
+                    b.HasIndex("ItemId1");
+
+                    b.ToTable("ItemsDetails");
                 });
 
             modelBuilder.Entity("Domain.Order", b =>
@@ -94,12 +115,6 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Color")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CompressionClass")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Gender")
                         .HasColumnType("text");
 
                     b.Property<string>("ItemId")
@@ -335,6 +350,13 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.ItemDetails", b =>
+                {
+                    b.HasOne("Domain.Item", null)
+                        .WithMany("Items")
+                        .HasForeignKey("ItemId1");
+                });
+
             modelBuilder.Entity("Domain.OrderItem", b =>
                 {
                     b.HasOne("Domain.Order", null)
@@ -403,6 +425,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Item", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Domain.Order", b =>

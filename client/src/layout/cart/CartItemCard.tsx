@@ -2,12 +2,16 @@ import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
 import FlexBetween from "../../reusable/FlexBetween";
 import { CartItem } from "../../models/CartItem";
 import { useStore } from "../../stores/store";
-import { RemoveOutlined, AddOutlined } from "@mui/icons-material";
+import {
+  RemoveOutlined,
+  AddOutlined,
+  DeleteOutlined,
+} from "@mui/icons-material";
 
 type Props = { cartItem: CartItem };
 const CartItemCard = ({ cartItem }: Props) => {
   const {
-    itemStore: { updateCartQuantity, updateCartColor, updateCartSize },
+    itemStore: { updateCartQuantity, updateCartOptions, deleteFromCart },
   } = useStore();
 
   const handleQuantityChange = (q: number) => {
@@ -21,11 +25,26 @@ const CartItemCard = ({ cartItem }: Props) => {
         width="150px"
       />
       <Box flexBasis="40%">
-        <Typography>{cartItem.item.name}</Typography>
         <FlexBetween>
+          <Typography>{cartItem.item.name}</Typography>
+          <IconButton onClick={() => deleteFromCart(cartItem)}>
+            <DeleteOutlined />
+          </IconButton>
+        </FlexBetween>
+        <Box>
           <Select
+            variant="standard"
+            fullWidth
             value={cartItem.color}
-            onChange={(e) => updateCartColor(cartItem, e.target.value)}
+            onChange={(e) =>
+              updateCartOptions(
+                cartItem,
+                cartItem.size!,
+                e.target.value,
+                cartItem.gender!,
+                cartItem.compressionClass!
+              )
+            } //item, size, color, gender, compClass
           >
             {cartItem.item.colors.map((c) => (
               <MenuItem key={c} value={c}>
@@ -34,8 +53,18 @@ const CartItemCard = ({ cartItem }: Props) => {
             ))}
           </Select>
           <Select
+            variant="standard"
+            fullWidth
             value={cartItem.size}
-            onChange={(e) => updateCartSize(cartItem, e.target.value)}
+            onChange={(e) =>
+              updateCartOptions(
+                cartItem,
+                e.target.value,
+                cartItem.color!,
+                cartItem.gender!,
+                cartItem.compressionClass!
+              )
+            } //item, size, color, gender, compClass
           >
             {cartItem.item.sizes.map((s) => (
               <MenuItem key={s} value={s}>
@@ -43,7 +72,47 @@ const CartItemCard = ({ cartItem }: Props) => {
               </MenuItem>
             ))}
           </Select>
-        </FlexBetween>
+          <Select
+            variant="standard"
+            fullWidth
+            value={cartItem.gender}
+            onChange={(e) =>
+              updateCartOptions(
+                cartItem,
+                cartItem.size!,
+                cartItem.color!,
+                e.target.value,
+                cartItem.compressionClass!
+              )
+            } //item, size, color, gender, compClass
+          >
+            {cartItem.item.genders.map((s) => (
+              <MenuItem key={s} value={s}>
+                {s}
+              </MenuItem>
+            ))}
+          </Select>
+          <Select
+            variant="standard"
+            fullWidth
+            value={cartItem.compressionClass}
+            onChange={(e) =>
+              updateCartOptions(
+                cartItem,
+                cartItem.size!,
+                cartItem.color!,
+                cartItem.gender!,
+                e.target.value
+              )
+            } //item, size, color, gender, compClass
+          >
+            {cartItem.item.compressionClasses.map((s) => (
+              <MenuItem key={s} value={s}>
+                {s}
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
         <Box display="flex" justifyContent="center" alignItems="center">
           <IconButton
             onClick={() => handleQuantityChange(cartItem.quantity - 1)}

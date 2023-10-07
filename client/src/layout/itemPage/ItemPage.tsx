@@ -19,6 +19,7 @@ import {
 import { CartItem } from "../../models/CartItem";
 import ItemDetails from "./ItemDetails";
 import ItemImages from "./ItemImages";
+import { ItemOptions } from "../../models/Item";
 
 const ItemPage = () => {
   const {
@@ -27,7 +28,7 @@ const ItemPage = () => {
       selectedItem: item,
       loading,
       clearSelectedItem,
-      updateCart,
+      addToCart,
       openCart,
     },
   } = useStore();
@@ -37,8 +38,12 @@ const ItemPage = () => {
   const isMobile = useMediaQuery("(max-width:900px)");
 
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState("");
-  const [color, setColor] = useState("");
+  const [options, setOptions] = useState<ItemOptions>({
+    size: "",
+    color: "",
+    gender: "",
+    compressionClass: "",
+  });
 
   const handleQuantityChange = (updatedQuantity: number) => {
     if (updatedQuantity < 1) return;
@@ -46,21 +51,22 @@ const ItemPage = () => {
   };
 
   const handleAddToCart = () => {
-    console.log(color);
-    console.log(size);
-    updateCart(new CartItem(item!, quantity, size, color));
+    console.log(options);
+    addToCart(new CartItem(item!, quantity, options));
   };
 
   useEffect(() => {
     if (id)
       loadItem(id).then((item) => {
         if (item) {
-          setSize(item.sizes[0]);
-          setColor(item.colors[0]);
+          setOptions({
+            size: item.sizes[0],
+            color: item.colors[0],
+            gender: item.genders[0],
+            compressionClass: item.compressionClasses[0],
+          });
         }
       });
-    console.log(size);
-    console.log(color);
     return () => clearSelectedItem();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, clearSelectedItem, loadItem]);
@@ -102,23 +108,47 @@ const ItemPage = () => {
           )}
 
           {/* SIZE & COLOR CONFIG */}
-          <Box mt="1rem" />
-          <ButtonGroup>
+          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
+            {item.colors.map((c) => (
+              <Button
+                key={c}
+                onClick={() => setOptions({ ...options, color: c })}
+                disabled={c === options.color}
+              >
+                {c}
+              </Button>
+            ))}
+          </ButtonGroup>
+          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
             {item.sizes.map((s) => (
-              <Button key={s} onClick={() => setSize(s)} disabled={s === size}>
+              <Button
+                key={s}
+                onClick={() => setOptions({ ...options, size: s })}
+                disabled={s === options.size}
+              >
                 {s}
               </Button>
             ))}
           </ButtonGroup>
-          <Box />
-          <ButtonGroup sx={{ marginTop: "1rem" }}>
-            {item.colors.map((c) => (
+          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
+            {item.genders.map((g) => (
               <Button
-                key={c}
-                onClick={() => setColor(c)}
-                disabled={c === color}
+                key={g}
+                onClick={() => setOptions({ ...options, gender: g })}
+                disabled={g === options.gender}
               >
-                {c}
+                {g}
+              </Button>
+            ))}
+          </ButtonGroup>
+          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
+            {item.compressionClasses.map((cc) => (
+              <Button
+                key={cc}
+                onClick={() => setOptions({ ...options, compressionClass: cc })}
+                disabled={cc === options.compressionClass}
+              >
+                {cc}
               </Button>
             ))}
           </ButtonGroup>
@@ -137,14 +167,7 @@ const ItemPage = () => {
               <Typography variant="h5">Not In Store</Typography>
             )}
           </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            sx={{
-              pointerEvents: item.added ? "none" : "auto",
-              opacity: item.added ? 0.5 : 1,
-            }}
-          >
+          <Box display="flex" alignItems="center">
             <IconButton onClick={() => handleQuantityChange(quantity - 1)}>
               <RemoveOutlined sx={{ fontSize: "1.5rem" }} />
             </IconButton>
@@ -153,14 +176,14 @@ const ItemPage = () => {
               <AddOutlined sx={{ fontSize: "1.5rem" }} />
             </IconButton>
           </Box>
+          {item.added && <Typography color="primary">В Кошику</Typography>}
           <Box display="flex" gap="1rem">
             <Button
-              color={item.added ? "error" : "primary"}
               variant="contained"
               onClick={handleAddToCart}
               disabled={item.leftCount < 1}
             >
-              {item.added ? "Remove from Cart" : "Add to Cart"}
+              Додати в Кошик
             </Button>
             {!item.added && (
               <Button
@@ -172,7 +195,7 @@ const ItemPage = () => {
                 }}
                 disabled={item.leftCount < 1}
               >
-                Buy Now
+                Купити Зараз
               </Button>
             )}
           </Box>

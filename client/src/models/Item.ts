@@ -5,6 +5,8 @@ export interface Item {
   details: string;
   sizes: string[];
   colors: string[];
+  genders: string[];
+  compressionClasses: string[];
   category: string;
   images: string[];
   price: number;
@@ -12,4 +14,11 @@ export interface Item {
   added: boolean;
   favorite: boolean;
   leftCount: number;
+}
+
+export interface ItemOptions {
+  size: string;
+  color: string;
+  gender: string;
+  compressionClass: string;
 }

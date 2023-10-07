@@ -72,7 +72,7 @@ const CartMenu = () => {
         </FlexBetween>
         <Divider />
         {cart.map((cartItem) => (
-          <CartItemCard key={cartItem.item.id} cartItem={cartItem} />
+          <CartItemCard key={cartItem.getId()} cartItem={cartItem} />
         ))}
         <Divider />
         <FlexBetween mt="0.5rem" mb="1rem">

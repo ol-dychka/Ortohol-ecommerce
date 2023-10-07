@@ -67,66 +67,83 @@ export default class itemStore {
     this.selectedItem = undefined;
   };
 
-  updateCart = (cartItem: CartItem) => {
-    // need to specify parameters such as size/color to get unique key
-    // and allow to buy items with different parameters at once
+  addToCart = (cartItem: CartItem) => {
+    const id = cartItem.getId();
+    console.log(id);
 
-    // delete
-    if (this.cartRegistry.has(cartItem.item.id)) {
-      this.cartRegistry.delete(cartItem.item.id);
-      this.itemRegistry.set(cartItem.item.id, {
-        ...cartItem.item,
-        added: false,
+    if (this.cartRegistry.has(id)) {
+      const oldItem = this.cartRegistry.get(id)!;
+      this.cartRegistry.set(id, {
+        ...oldItem,
+        quantity: oldItem?.quantity + cartItem.quantity,
       });
-      if (this.selectedItem?.id === cartItem.item.id)
-        this.selectedItem.added = false;
-      return;
+    } else {
+      this.cartRegistry.set(id, cartItem);
+      this.setAdded(cartItem.item, true);
     }
-    // add
-    this.itemRegistry.set(cartItem.item.id, {
-      ...cartItem.item,
-      added: true,
-    } as Item);
-    this.cartRegistry.set(cartItem.item.id, {
-      ...cartItem,
-      item: { ...cartItem.item, added: true },
-    });
-    if (this.selectedItem?.id === cartItem.item.id)
-      this.selectedItem.added = true;
     this.wasOpened = false;
   };
 
+  deleteFromCart = (cartItem: CartItem) => {
+    this.cartRegistry.delete(cartItem.getId());
+    this.setAdded(cartItem.item, false);
+  };
+
   updateCartQuantity = (cartItem: CartItem, quantity: number) => {
+    const id = cartItem.getId();
     // delete
     if (quantity === 0) {
-      this.cartRegistry.delete(cartItem.item.id);
-      this.itemRegistry.set(cartItem.item.id, {
-        ...cartItem.item,
-        added: false,
-      });
-      if (this.selectedItem?.id === cartItem.item.id)
-        this.selectedItem.added = false;
-      return;
+      this.cartRegistry.delete(id);
+      this.setAdded(cartItem.item, false);
     }
     // update quantity
-    this.cartRegistry.set(cartItem.item.id, {
+    this.cartRegistry.set(id, {
       ...cartItem,
       quantity: quantity,
     });
   };
 
-  updateCartSize = (cartItem: CartItem, size: string) => {
-    this.cartRegistry.set(cartItem.item.id, {
-      ...cartItem,
-      size: size,
+  updateCartOptions = (
+    cartItem: CartItem,
+    size: string,
+    color: string,
+    gender: string,
+    compressionClass: string
+  ) => {
+    // delete previous instance with id id-size-PREV_COLOR-gender-compclass
+    // and replace it with              id-size-NEW_COLOR-gender-compclass
+    // include case when new id already exists
+    const newCartItem: CartItem = new CartItem(
+      cartItem.item,
+      cartItem.quantity,
+      {
+        size,
+        color,
+        gender,
+        compressionClass,
+      }
+    );
+    const newId = newCartItem.getId();
+    console.log("new:", newId);
+    const oldId = cartItem.getId();
+    console.log("old:", oldId);
+    runInAction(() => {
+      this.cartRegistry.delete(oldId);
     });
-  };
 
-  updateCartColor = (cartItem: CartItem, color: string) => {
-    this.cartRegistry.set(cartItem.item.id, {
-      ...cartItem,
-      color: color,
-    });
+    if (this.cartRegistry.has(newId)) {
+      runInAction(() => {
+        const oldItem = this.cartRegistry.get(newId)!;
+        this.cartRegistry.set(newId, {
+          ...oldItem,
+          quantity: oldItem?.quantity + cartItem.quantity,
+        });
+      });
+    } else {
+      runInAction(() => {
+        this.cartRegistry.set(newId, newCartItem);
+      });
+    }
   };
 
   openCart = (state: boolean) => {
@@ -153,5 +170,13 @@ export default class itemStore {
         sessionId: session.sessionId,
       })
     );
+  };
+
+  setAdded = (item: Item, state: boolean) => {
+    this.itemRegistry.set(item.id, {
+      ...item,
+      added: state,
+    });
+    if (this.selectedItem?.id === item.id) this.selectedItem.added = state;
   };
 }

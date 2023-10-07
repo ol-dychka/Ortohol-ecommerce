@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Item } from "../../models/Item";
+import { Item, ItemOptions } from "../../models/Item";
 import FlexBetween from "../../reusable/FlexBetween";
 import {
   AddOutlined,
@@ -29,21 +29,24 @@ const ItemCard = ({ item }: Props) => {
   const theme = useTheme();
 
   const {
-    itemStore: { updateCart },
+    itemStore: { addToCart },
   } = useStore();
 
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState(item.sizes[0]);
-  const [color, setColor] = useState(item.colors[0]);
+  const [options, setOptions] = useState<ItemOptions>({
+    size: item.sizes[0],
+    color: item.colors[0],
+    gender: item.genders[0],
+    compressionClass: item.compressionClasses[0],
+  });
   const [open, setOpen] = useState(false);
-
   const handleQuantityChange = (updatedQuantity: number) => {
     if (updatedQuantity < 1) return;
     setQuantity(updatedQuantity);
   };
 
   const handleAddToCart = () => {
-    if (size && color) updateCart(new CartItem(item, quantity, size, color));
+    addToCart(new CartItem(item, quantity, options));
   };
 
   return (
@@ -100,38 +103,19 @@ const ItemCard = ({ item }: Props) => {
         )}
 
         {/* SIZE & COLOR SELECTION */}
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          sx={{
-            pointerEvents: item.added ? "none" : "auto",
-            opacity: item.added ? 0.5 : 1,
-          }}
-        >
-          {item.sizes.length > 1 || item.colors.length > 1 ? (
-            <>
-              <Typography>Select...</Typography>
-              <IconButton onClick={() => setOpen(!open)}>
-                {open ? (
-                  <KeyboardArrowUpOutlined />
-                ) : (
-                  <KeyboardArrowDownOutlined />
-                )}
-              </IconButton>
-            </>
-          ) : (
-            <>
-              <IconButton onClick={() => handleQuantityChange(quantity - 1)}>
-                <RemoveOutlined />
-              </IconButton>
-              <Typography>{quantity}</Typography>
-              <IconButton onClick={() => handleQuantityChange(quantity + 1)}>
-                <AddOutlined />
-              </IconButton>
-            </>
-          )}
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <FlexBetween gap="1rem">
+            <Typography>Оберіть...</Typography>
+            <IconButton onClick={() => setOpen(!open)}>
+              {open ? (
+                <KeyboardArrowUpOutlined />
+              ) : (
+                <KeyboardArrowDownOutlined />
+              )}
+            </IconButton>
+          </FlexBetween>
         </Box>
+        {/* DROPDOWN SELECTS */}
         <Box
           position="absolute"
           top="78px"
@@ -142,10 +126,10 @@ const ItemCard = ({ item }: Props) => {
           padding="0.25rem"
         >
           <FlexBetween gap="1rem">
-            <Typography>Size</Typography>
+            <Typography>Розмір</Typography>
             <Select
-              value={size}
-              onChange={(e) => setSize(e.target.value)}
+              value={options.size}
+              onChange={(e) => setOptions({ ...options, size: e.target.value })}
               variant="standard"
             >
               {item.sizes.map((s) => (
@@ -156,15 +140,49 @@ const ItemCard = ({ item }: Props) => {
             </Select>
           </FlexBetween>
           <FlexBetween gap="1rem">
-            <Typography>Color</Typography>
+            <Typography>Колір</Typography>
             <Select
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
+              value={options.color}
+              onChange={(e) =>
+                setOptions({ ...options, color: e.target.value })
+              }
               variant="standard"
             >
               {item.colors.map((c) => (
                 <MenuItem key={c} value={c}>
                   {c}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
+          <FlexBetween gap="1rem">
+            <Typography>Пол</Typography>
+            <Select
+              value={options.gender}
+              onChange={(e) =>
+                setOptions({ ...options, gender: e.target.value })
+              }
+              variant="standard"
+            >
+              {item.genders.map((s) => (
+                <MenuItem key={s} value={s}>
+                  {s}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
+          <FlexBetween gap="1rem">
+            <Typography>Клас компресії</Typography>
+            <Select
+              value={options.compressionClass}
+              onChange={(e) =>
+                setOptions({ ...options, compressionClass: e.target.value })
+              }
+              variant="standard"
+            >
+              {item.compressionClasses.map((s) => (
+                <MenuItem key={s} value={s}>
+                  {s}
                 </MenuItem>
               ))}
             </Select>
@@ -181,12 +199,9 @@ const ItemCard = ({ item }: Props) => {
         </Box>
 
         {/* CART MENU */}
-        <Button
-          color={item.added ? "error" : "primary"}
-          variant="contained"
-          onClick={handleAddToCart}
-        >
-          {item.added ? "Remove from Cart" : "Add to Cart"}
+        {item.added && <Typography color="primary">В Кошику</Typography>}
+        <Button variant="contained" onClick={handleAddToCart}>
+          Додати в Кошик
         </Button>
       </FlexBetween>
     </FlexBetween>
