@@ -5,6 +5,7 @@ import { CartItem } from "../models/CartItem";
 import { CheckoutFormValues } from "../models/CheckoutFormValues";
 import { loadStripe } from "@stripe/stripe-js";
 import { Order, OrderItem } from "../models/OrderItem";
+import { Pagination, PagingParams } from "../models/Pagination";
 
 export default class itemStore {
   itemRegistry = new Map<string, Item>();
@@ -13,9 +14,18 @@ export default class itemStore {
   cartRegistry = new Map<string, CartItem>();
   isOpen = false;
   wasOpened = false;
+  pagination: Pagination | null = null;
+  pagingParams = new PagingParams();
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get axiosParams() {
+    const params = new URLSearchParams();
+    params.append("pageNumber", this.pagingParams.pageNumber.toString());
+    params.append("pageSize", this.pagingParams.pageSize.toString());
+    return params;
   }
 
   get items() {
@@ -29,18 +39,33 @@ export default class itemStore {
   loadItems = async () => {
     this.loading = true;
     try {
-      const result = await api.Items.list();
+      const result = await api.Items.list(this.axiosParams);
+      console.log(result);
       runInAction(() => {
-        result.forEach((item) => {
-          item.added = this.cartRegistry.has(item.id);
+        this.itemRegistry.clear();
+        result.data.data.forEach((item) => {
+          // console.log(
+          //   Array.from(this.cartRegistry.keys()).map((x) => x.slice(0, 36))
+          // );
+          // console.log("original id", item.id);
+
+          // grabbing Item ID part from the unique cart key
+          item.added = Array.from(this.cartRegistry.keys()).some(
+            (x) => x.slice(0, 36) === item.id
+          );
           this.itemRegistry.set(item.id, item);
         });
+        this.pagination = result.data.pagination;
         this.loading = false;
       });
     } catch (error) {
       console.log(error);
       runInAction(() => (this.loading = false));
     }
+  };
+
+  setPagingParams = (pagingParams: PagingParams) => {
+    this.pagingParams = pagingParams;
   };
 
   loadItem = async (id: string) => {
@@ -68,9 +93,9 @@ export default class itemStore {
   };
 
   addToCart = (cartItem: CartItem) => {
+    // getting unique ID - combination of Item ID, size, color, gender and compression class
     const id = cartItem.getId();
-    console.log(id);
-
+    // console.log(id);
     if (this.cartRegistry.has(id)) {
       const oldItem = this.cartRegistry.get(id)!;
       this.cartRegistry.set(id, {

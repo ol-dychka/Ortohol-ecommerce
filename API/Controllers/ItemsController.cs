@@ -9,9 +9,9 @@ namespace API.Controllers
     public class ItemsController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<ItemDto>>> GetPosts()
+        public async Task<ActionResult<List<ItemDto>>> GetPosts([FromQuery] ItemParams pagingParams)
         {
-            return HandleResult(await Mediator.Send(new List.Query()));
+            return HandlePagedResult(await Mediator.Send(new List.Query { Params = pagingParams }));
         }
 
         [HttpGet("{id}")]

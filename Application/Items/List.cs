@@ -11,9 +11,12 @@ namespace Application.Items
 {
     public class List
     {
-        public class Query : IRequest<Result<List<ItemDto>>> { }
+        public class Query : IRequest<Result<PagedList<ItemDto>>>
+        {
+            public ItemParams Params { get; set; }
+        }
 
-        public class Handler : IRequestHandler<Query, Result<List<ItemDto>>>
+        public class Handler : IRequestHandler<Query, Result<PagedList<ItemDto>>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -23,14 +26,20 @@ namespace Application.Items
                 _context = context;
             }
 
-            public async Task<Result<List<ItemDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<PagedList<ItemDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var items = await _context.Items
+                var query = _context.Items
                     .Include(p => p.Images)
                     .ProjectTo<ItemDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
+                    .AsQueryable();
 
-                return Result<List<ItemDto>>.Success(items);
+                if (request.Params.Category != null)
+                {
+                    query = query.Where(x => x.Category == request.Params.Category);
+                }
+
+                return Result<PagedList<ItemDto>>.Success(await PagedList<ItemDto>
+                    .CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));
             }
         }
     }

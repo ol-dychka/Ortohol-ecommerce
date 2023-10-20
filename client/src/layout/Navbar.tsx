@@ -8,7 +8,8 @@ import {
   useTheme,
 } from "@mui/material";
 import {
-  AppsOutlined,
+  AppsRounded,
+  ExpandMoreOutlined,
   FavoriteBorderOutlined,
   MenuOutlined,
   PersonOutlined,
@@ -24,17 +25,21 @@ import { observer } from "mobx-react-lite";
 import { router } from "./Routes";
 import MobileMenu from "./navbarInfo/MobileMenu";
 import { useState } from "react";
+import NavbarCategoryOption from "../reusable/NavbarCategoryOption";
+import { Category } from "../models/Item";
 
 const Navbar = () => {
   const theme = useTheme();
 
   const {
     itemStore: { openCart, cart, wasOpened },
+    categoriesStore: { setCategory },
   } = useStore();
 
   const isMobile = useMediaQuery("(max-width:900px)");
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
   const handleMobileMenuNavigate = (destination: string) => {
     router.navigate(destination).then(() => setIsOpen(false));
@@ -207,40 +212,79 @@ const Navbar = () => {
             </StyledBadge>
           </Box>
         ) : (
+          // PC view
           <Box
             bgcolor="primary.main"
             display="flex"
             alignItems="center"
-            gap="1rem"
+            gap="2rem"
             padding="1.5rem 4rem"
             sx={{
               "& .MuiTypography-root": {
                 color: "primary.contrastText",
                 fontSize: "0.9rem",
                 fontWeight: "700",
+                // letterSpacing: "1px",
               },
-              "&:hover > .MuiTypography-root": {
+              "&:hover .MuiTypography-root": {
                 cursor: "pointer",
               },
             }}
+            onMouseLeave={() => setIsCategoriesOpen(false)}
           >
-            <FlexBetween>
-              <AppsOutlined sx={{ color: "primary.light" }} />
-              <Typography>Categories</Typography>
+            <FlexBetween
+              gap="0.2rem"
+              position="relative"
+              onMouseEnter={() => setIsCategoriesOpen(true)}
+            >
+              <AppsRounded
+                sx={{ color: "primary.light", fontSize: "1.5rem" }}
+              />
+              <Typography>Категорії</Typography>
+              <ExpandMoreOutlined
+                sx={{ color: "primary.light", fontSize: "0.9rem" }}
+              />
+              {isCategoriesOpen && (
+                <Box position="absolute" top="3rem">
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    flexWrap="wrap"
+                    maxHeight="550px"
+                  >
+                    {Object.entries(Category).map(([key, category]) => (
+                      <NavbarCategoryOption
+                        key={key}
+                        name={category}
+                        action={() =>
+                          router
+                            .navigate("/categories")
+                            .then(() => setCategory(category))
+                            .then(() => setIsCategoriesOpen(false))
+                        }
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              )}
             </FlexBetween>
             <Divider
               orientation="vertical"
-              sx={{ height: "1rem", bgcolor: "primary.contrastText" }}
+              sx={{ height: "1rem", bgcolor: "primary.light" }}
             />
-            <Typography onClick={() => router.navigate("/")}>Main</Typography>
-            <Typography>Our Goods</Typography>
+            <Typography onClick={() => router.navigate("/")}>
+              Головна
+            </Typography>
+            <Typography>Наші Товари</Typography>
             <Typography onClick={() => router.navigate("/customer-info")}>
-              Customer Information
+              Інформація для клієнта
             </Typography>
             <Typography onClick={() => router.navigate("/contact")}>
-              Contact
+              Наші Контаки
             </Typography>
-            <Typography onClick={() => router.navigate("/map")}>Map</Typography>
+            <Typography onClick={() => router.navigate("/map")}>
+              Про Нас
+            </Typography>
           </Box>
         )}
       </Sticky>

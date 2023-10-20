@@ -9,6 +9,7 @@ import Failure from "./checkout/Failure";
 import Map from "./navbarInfo/Map";
 import CustomerInformation from "./navbarInfo/CustomerInformation";
 import Contact from "./navbarInfo/Contact";
+import CategoriesPage from "./categoriesPage/CategoriesPage";
 
 export const routes: RouteObject[] = [
   {
@@ -23,6 +24,7 @@ export const routes: RouteObject[] = [
       { path: "/map", element: <Map /> },
       { path: "/customer-info", element: <CustomerInformation /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/categories", element: <CategoriesPage /> },
     ],
   },
 ];
