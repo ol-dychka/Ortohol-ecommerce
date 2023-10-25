@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import { Item } from "./models/Item";
+import { Category, Item } from "./models/Item";
 import { Order } from "./models/OrderItem";
 import StripeCheckoutSessionResult from "./models/StripeCheckoutSessionResult";
 import { PaginatedResult } from "./models/Pagination";
+import PriceRange from "./models/PriceRange";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -74,6 +75,8 @@ const requests = {
 const Items = {
   list: (params: URLSearchParams) =>
     axios.get<PaginatedResult<Item[]>>("/items", { params }),
+  priceRange: (category: Category) =>
+    requests.get<PriceRange>(`/items/${category}/range`),
   single: (id: string) => requests.get<Item>(`/items/${id}`),
   order: (order: Order) =>
     requests.post<StripeCheckoutSessionResult>(`/items`, order),

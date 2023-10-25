@@ -38,6 +38,13 @@ namespace Application.Items
                     query = query.Where(x => x.Category == request.Params.Category);
                 }
 
+                if (request.Params.PriceMin != null && request.Params.PriceMax != null)
+                {
+                    var min = Math.Floor(Convert.ToDouble(request.Params.PriceMin));
+                    var max = Math.Ceiling(Convert.ToDouble(request.Params.PriceMax));
+                    query = query.Where(x => x.Price >= min && x.Price <= max);
+                }
+
                 return Result<PagedList<ItemDto>>.Success(await PagedList<ItemDto>
                     .CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));
             }

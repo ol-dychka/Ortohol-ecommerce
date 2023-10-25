@@ -1,23 +1,27 @@
 /* eslint-disable react-refresh/only-export-components */
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../stores/store";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Slider, Typography } from "@mui/material";
 import ItemCard from "../itemsDashboard/ItemCard";
 import FlexBetween from "../../reusable/FlexBetween";
 import { PagingParams } from "../../models/Pagination";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Category } from "../../models/Item";
+import CategoryButton from "./CategoryButton";
+import PriceRange from "../../models/PriceRange";
 
 const CategoriesPage = () => {
   const {
     categoriesStore: {
       items,
       loadItems,
+      loadPriceRange,
       loading,
       category,
       setCategory,
       setPagingParams,
       pagination,
+      priceRange,
     },
   } = useStore();
 
@@ -26,17 +30,55 @@ const CategoriesPage = () => {
     loadItems();
   };
 
+  const [price, setPrice] = useState([0, 0]);
+
+  const handlePriceChange = (_: Event, newValue: number | number[]) => {
+    setPrice(newValue as number[]);
+    console.log(price);
+  };
+
+  const applyPriceChange = () => {
+    loadItems(new PriceRange(price[0], price[1]));
+  };
+
   useEffect(() => {
     loadItems();
+    loadPriceRange().then((priceRange) => {
+      if (priceRange) setPrice([priceRange.min, priceRange.max]);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadItems, category]);
 
   return (
     <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap="1rem">
       <Box display="flex" flexDirection="column">
-        {Object.entries(Category).map(([key, category]) => (
-          <Button key={key} onClick={() => setCategory(category)}>
-            {category}
-          </Button>
+        {priceRange && (
+          <Box>
+            <Box paddingX="1rem">
+              <Slider
+                value={price}
+                min={priceRange.min}
+                max={priceRange.max}
+                onChange={handlePriceChange}
+                valueLabelDisplay="auto"
+              />
+            </Box>
+            <FlexBetween>
+              <Typography>{priceRange.min}$</Typography>
+              <Button variant="contained" onClick={applyPriceChange}>
+                Apply
+              </Button>
+              <Typography>{priceRange.max}$</Typography>
+            </FlexBetween>
+          </Box>
+        )}
+        {Object.entries(Category).map(([key, c]) => (
+          <CategoryButton
+            key={key}
+            action={() => setCategory(c)}
+            text={c}
+            isActive={c === category}
+          />
         ))}
       </Box>
       <Box gridColumn="span 3">

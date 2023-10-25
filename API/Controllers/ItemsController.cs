@@ -25,5 +25,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Application.Items.Order.Command { UserName = order.Username, Email = order.Email, Items = order.Items }));
         }
+
+        [HttpGet("{category}/range")]
+        public async Task<ActionResult<ItemPriceRange>> GetPriceRange(string category)
+        {
+            return HandleResult(await Mediator.Send(new PriceRange.Query { Category = category }));
+        }
     }
 }
