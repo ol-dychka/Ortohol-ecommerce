@@ -176,14 +176,14 @@ const ItemPage = () => {
               <AddOutlined sx={{ fontSize: "1.5rem" }} />
             </IconButton>
           </Box>
-          {item.added && <Typography color="primary">В Кошику</Typography>}
+          {item.added && <Typography color="primary">In Cart</Typography>}
           <Box display="flex" gap="1rem">
             <Button
               variant="contained"
               onClick={handleAddToCart}
               disabled={item.leftCount < 1}
             >
-              Додати в Кошик
+              Add to Cart
             </Button>
             {!item.added && (
               <Button
@@ -195,7 +195,7 @@ const ItemPage = () => {
                 }}
                 disabled={item.leftCount < 1}
               >
-                Купити Зараз
+                Buy Now
               </Button>
             )}
           </Box>

@@ -13,15 +13,15 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230911061023_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240409055507_Initial-Create")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.17")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -35,10 +35,19 @@ namespace Persistence.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("text");
 
+                    b.Property<List<string>>("Colors")
+                        .HasColumnType("text[]");
+
+                    b.Property<List<string>>("CompressionClasses")
+                        .HasColumnType("text[]");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<List<string>>("Images")
+                    b.Property<string>("Details")
+                        .HasColumnType("text");
+
+                    b.Property<List<string>>("Genders")
                         .HasColumnType("text[]");
 
                     b.Property<string>("Name")
@@ -50,9 +59,87 @@ namespace Persistence.Migrations
                     b.Property<double>("PriceSale")
                         .HasColumnType("double precision");
 
+                    b.Property<List<string>>("Sizes")
+                        .HasColumnType("text[]");
+
                     b.HasKey("Id");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("Domain.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MobileNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StripeSessionId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Domain.OrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompressionClass")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ItemId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("Domain.Photo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -251,6 +338,20 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.OrderItem", b =>
+                {
+                    b.HasOne("Domain.Order", null)
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("Domain.Photo", b =>
+                {
+                    b.HasOne("Domain.Item", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ItemId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -300,6 +401,16 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Item", b =>
+                {
+                    b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("Domain.Order", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

@@ -59,8 +59,8 @@ const Footer = () => {
           {(!isMobile || (isMobile && section === Section.Contacts)) && (
             <Box>
               <Typography color="secondary.dark" maxWidth="250px">
-                Україна, Хмельницький, Хмельницька область, вул. Проскурівська,
-                58, Індекс: 29000
+                Ukraine, Khmelnitsky, Khmelnitskaya obl., Proskurivska str., 58,
+                Index: 29000
               </Typography>
               <Typography color="secondary.dark">
                 +380 (68) 077-66-88
@@ -74,7 +74,7 @@ const Footer = () => {
               <Typography color="secondary.dark">
                 ortomed-variteks@ukr.net
               </Typography>
-              <Typography color="secondary.dark">Наш Prom</Typography>
+              {/* <Typography color="secondary.dark">Our Prom</Typography> */}
             </Box>
           )}
         </Box>
@@ -97,26 +97,24 @@ const Footer = () => {
           </FlexBetween>
           {(!isMobile || (isMobile && section === Section.Categories)) && (
             <Box>
+              <Typography color="secondary.dark">Abdominal Corsets</Typography>
               <Typography color="secondary.dark">
-                Абдомінальні корсети
+                Ankle and Foot Bandages
               </Typography>
               <Typography color="secondary.dark">
-                Бандажі для гомілковостопного суглоба та стопи
+                Bandages for Shoulder and Elbow Joints
               </Typography>
               <Typography color="secondary.dark">
-                Бандажі для плечового та ліктьового суглобів
+                Arm Bandages and Splints
               </Typography>
               <Typography color="secondary.dark">
-                Бандажі та шини для руки
+                Children's Orthopedic Products
               </Typography>
               <Typography color="secondary.dark">
-                Дитячі ортопедичні вироби
+                Elastic Bandages and Other Products
               </Typography>
               <Typography color="secondary.dark">
-                Еластичні бандажі та інша продукція
-              </Typography>
-              <Typography color="secondary.dark">
-                Компресійна регульована продукція Nexus
+                Nexus Adjustable Compression Products
               </Typography>
             </Box>
           )}
@@ -139,24 +137,26 @@ const Footer = () => {
           {(!isMobile || (isMobile && section === Section.Schedule)) && (
             <Box>
               <Typography color="secondary.dark">
-                Понеділок 09:00 – 19:00
+                Monday 09:00 – 19:00
               </Typography>
               <Typography color="secondary.dark">
-                Вівторок 09:00 – 19:00
+                Tuesday 09:00 – 19:00
               </Typography>
               <Typography color="secondary.dark">
-                Середа 09:00 – 19:00
+                Wednesday 09:00 – 19:00
               </Typography>
               <Typography color="secondary.dark">
-                Четвер 09:00 – 19:00
+                Thursday 09:00 – 19:00
               </Typography>
               <Typography color="secondary.dark">
-                П’ятниця 09:00 – 19:00
+                Friday 09:00 – 19:00
               </Typography>
               <Typography color="secondary.dark">
-                Субота 11:00 – 15:00
+                Saturday 11:00 – 15:00
               </Typography>
-              <Typography color="secondary.dark">Неділя Вихідний</Typography>
+              <Typography color="secondary.dark">
+                Sunday is a Day Off
+              </Typography>
             </Box>
           )}
         </Box>

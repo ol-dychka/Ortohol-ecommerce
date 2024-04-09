@@ -105,7 +105,7 @@ const ItemCard = ({ item }: Props) => {
         {/* SIZE & COLOR SELECTION */}
         <Box display="flex" justifyContent="center" alignItems="center">
           <FlexBetween gap="1rem">
-            <Typography>Оберіть...</Typography>
+            <Typography>Choose...</Typography>
             <IconButton onClick={() => setOpen(!open)}>
               {open ? (
                 <KeyboardArrowUpOutlined />
@@ -126,7 +126,7 @@ const ItemCard = ({ item }: Props) => {
           padding="0.25rem"
         >
           <FlexBetween gap="1rem">
-            <Typography>Розмір</Typography>
+            <Typography>Size</Typography>
             <Select
               value={options.size}
               onChange={(e) => setOptions({ ...options, size: e.target.value })}
@@ -140,7 +140,7 @@ const ItemCard = ({ item }: Props) => {
             </Select>
           </FlexBetween>
           <FlexBetween gap="1rem">
-            <Typography>Колір</Typography>
+            <Typography>Color</Typography>
             <Select
               value={options.color}
               onChange={(e) =>
@@ -156,7 +156,7 @@ const ItemCard = ({ item }: Props) => {
             </Select>
           </FlexBetween>
           <FlexBetween gap="1rem">
-            <Typography>Пол</Typography>
+            <Typography>Sex</Typography>
             <Select
               value={options.gender}
               onChange={(e) =>
@@ -172,7 +172,7 @@ const ItemCard = ({ item }: Props) => {
             </Select>
           </FlexBetween>
           <FlexBetween gap="1rem">
-            <Typography>Клас компресії</Typography>
+            <Typography>Compression</Typography>
             <Select
               value={options.compressionClass}
               onChange={(e) =>
@@ -199,9 +199,9 @@ const ItemCard = ({ item }: Props) => {
         </Box>
 
         {/* CART MENU */}
-        {item.added && <Typography color="primary">В Кошику</Typography>}
+        {item.added && <Typography color="primary">In Cart</Typography>}
         <Button variant="contained" onClick={handleAddToCart}>
-          Додати в Кошик
+          Add to Cart
         </Button>
       </FlexBetween>
     </FlexBetween>

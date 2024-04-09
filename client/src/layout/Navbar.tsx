@@ -240,7 +240,7 @@ const Navbar = () => {
               <AppsRounded
                 sx={{ color: "primary.light", fontSize: "1.5rem" }}
               />
-              <Typography>Категорії</Typography>
+              <Typography>Categories</Typography>
               <ExpandMoreOutlined
                 sx={{ color: "primary.light", fontSize: "0.9rem" }}
               />
@@ -272,18 +272,16 @@ const Navbar = () => {
               orientation="vertical"
               sx={{ height: "1rem", bgcolor: "primary.light" }}
             />
-            <Typography onClick={() => router.navigate("/")}>
-              Головна
-            </Typography>
-            <Typography>Наші Товари</Typography>
+            <Typography onClick={() => router.navigate("/")}>Home</Typography>
+            <Typography>Our Products</Typography>
             <Typography onClick={() => router.navigate("/customer-info")}>
-              Інформація для клієнта
+              Customer Information
             </Typography>
             <Typography onClick={() => router.navigate("/contact")}>
-              Наші Контаки
+              Our Contacts
             </Typography>
             <Typography onClick={() => router.navigate("/map")}>
-              Про Нас
+              About Us
             </Typography>
           </Box>
         )}
