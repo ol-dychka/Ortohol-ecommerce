@@ -10,7 +10,7 @@ export default class categoriesStore {
   loading = false;
   pagination: Pagination | null = null;
   pagingParams = new PagingParams();
-  category = Category.temp_wearing;
+  category = Category.bandage_arm;
   priceRange: PriceRange | null = null;
 
   constructor() {

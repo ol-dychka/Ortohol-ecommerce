@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  CircularProgress,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -35,13 +36,29 @@ const ItemsDashboard = () => {
   // if (loading || !pagination) return <Box p="10rem">loading...</Box>;
   return (
     <Box>
-      <Box padding="2rem">
+      <Box position="relative">
         <img
-          src="main-banner.webp"
+          src="Orthopedics.png"
           alt="main-banner"
           height="100%"
           width="100%"
         />
+        <Box
+          position="absolute"
+          width="100%"
+          height="100%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          top="0"
+        >
+          <Typography
+            color="white"
+            sx={{ fontSize: "9rem", fontWeight: "semibold" }}
+          >
+            ORTOHALL
+          </Typography>
+        </Box>
       </Box>
 
       <FlexBetween flexDirection={isMobile ? "column" : "row"}>
@@ -53,7 +70,9 @@ const ItemsDashboard = () => {
         </ButtonGroup>
       </FlexBetween>
       {loading || !pagination ? (
-        <Box p="10rem">loading...</Box>
+        <Box height="900px" flex="center" alignItems="center" width="100%">
+          <CircularProgress />
+        </Box>
       ) : (
         <>
           <Box

@@ -53,7 +53,7 @@ const ItemCard = ({ item }: Props) => {
     <FlexBetween
       flexDirection="column"
       border={`1px ${theme.palette.secondary.dark} solid`}
-      height="370px"
+      height="420px"
       padding="5px"
     >
       <FlexBetween flexDirection="column">
@@ -72,11 +72,17 @@ const ItemCard = ({ item }: Props) => {
         <Typography
           fontWeight="700"
           onClick={() => router.navigate(`/items/${item.id}`)}
-          sx={{ cursor: "pointer" }}
+          sx={{
+            cursor: "pointer",
+            textAlign: "center",
+            ":hover": {
+              textDecoration: "underline",
+            },
+          }}
         >
           {item.name}
         </Typography>
-        <Typography>{item.category}</Typography>
+        <Typography sx={{ textAlign: "center" }}>{item.category}</Typography>
       </FlexBetween>
       <FlexBetween flexDirection="column" position="relative">
         <FlexBetween>
@@ -201,7 +207,7 @@ const ItemCard = ({ item }: Props) => {
         {/* CART MENU */}
         {item.added && <Typography color="primary">In Cart</Typography>}
         <Button variant="contained" onClick={handleAddToCart}>
-          Add to Cart
+          {item.added ? "Add More" : "Add to Cart"}
         </Button>
       </FlexBetween>
     </FlexBetween>

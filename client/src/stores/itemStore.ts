@@ -120,12 +120,13 @@ export default class itemStore {
     if (quantity === 0) {
       this.cartRegistry.delete(id);
       this.setAdded(cartItem.item, false);
+    } else {
+      // update quantity
+      this.cartRegistry.set(id, {
+        ...cartItem,
+        quantity: quantity,
+      });
     }
-    // update quantity
-    this.cartRegistry.set(id, {
-      ...cartItem,
-      quantity: quantity,
-    });
   };
 
   updateCartOptions = (

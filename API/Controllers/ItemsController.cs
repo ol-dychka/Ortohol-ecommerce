@@ -2,6 +2,7 @@ using Application.Core;
 using Application.DTOs;
 using Application.Items;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -20,6 +21,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Application.Items.Single.Query { Id = id }));
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<StripeCheckoutSessionResult>> Order(Domain.Order order)
         {
