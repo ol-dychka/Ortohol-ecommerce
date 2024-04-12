@@ -12,21 +12,21 @@ import {
   ExpandMoreOutlined,
   FavoriteBorderOutlined,
   MenuOutlined,
-  PersonOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import Sticky from "react-sticky-el";
-import StyledBadge from "../reusable/StyledBadge";
-import FlexBetween from "../reusable/FlexBetween";
-import NavbarIconButton from "../reusable/NavbarIconButton";
-import { useStore } from "../stores/store";
+import StyledBadge from "../../reusable/StyledBadge";
+import FlexBetween from "../../reusable/FlexBetween";
+import NavbarIconButton from "../../reusable/NavbarIconButton";
+import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
-import { router } from "./Routes";
-import MobileMenu from "./navbarInfo/MobileMenu";
+import { router } from "../Routes";
+import MobileMenu from "../navbarInfo/MobileMenu";
 import { useState } from "react";
-import NavbarCategoryOption from "../reusable/NavbarCategoryOption";
-import { Category } from "../models/Item";
+import NavbarCategoryOption from "../../reusable/NavbarCategoryOption";
+import { Category } from "../../models/Item";
+import ProfileIcon from "./ProfileIcon";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -102,13 +102,7 @@ const Navbar = () => {
               </IconButton>
             </StyledBadge>
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
-            <IconButton
-              sx={{
-                border: `0.25rem ${theme.palette.primary.main} solid`,
-              }}
-            >
-              <PersonOutlined />
-            </IconButton>
+            <ProfileIcon />
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
             <StyledBadge
               badgeContent={cart.length}

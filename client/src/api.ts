@@ -4,10 +4,18 @@ import { Order } from "./models/OrderItem";
 import StripeCheckoutSessionResult from "./models/StripeCheckoutSessionResult";
 import { PaginatedResult } from "./models/Pagination";
 import PriceRange from "./models/PriceRange";
+import { User, UserFormValues } from "./models/User";
+import { store } from "./stores/store";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
+
+axios.interceptors.request.use((config) => {
+  const token = store.userStore.token;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
 axios.interceptors.response.use(
   async (response) => {
@@ -82,8 +90,16 @@ const Items = {
     requests.post<StripeCheckoutSessionResult>(`/items`, order),
 };
 
+const Users = {
+  current: () => requests.get<User>("/account"),
+  login: (user: UserFormValues) => requests.post<User>("/account/login", user),
+  register: (user: UserFormValues) =>
+    requests.post<User>("/account/register", user),
+};
+
 const api = {
   Items,
+  Users,
 };
 
 export default api;

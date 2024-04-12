@@ -28,7 +28,7 @@ namespace API.Controllers
 
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
-            if (result) CreateUserDto(user);
+            if (result) return CreateUserDto(user);
 
             return Unauthorized();
         }
@@ -36,6 +36,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto){
             if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName)) {
+
                 return BadRequest("Username already taken");
             }
             // if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email)) {
