@@ -5,9 +5,21 @@ import { themeSettings } from "../theme";
 import Footer from "./Footer";
 import CartMenu from "./cart/CartMenu";
 import ModalContainer from "../reusable/ModalContainer";
+import { useStore } from "../stores/store";
+import { useEffect } from "react";
 
 function App() {
+  const {
+    userStore: { token, getUser },
+  } = useStore();
+
   const theme = createTheme(themeSettings());
+
+  useEffect(() => {
+    if (token) {
+      getUser();
+    }
+  }, [token, getUser]);
 
   return (
     <ThemeProvider theme={theme}>

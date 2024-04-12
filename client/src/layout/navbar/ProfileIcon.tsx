@@ -65,26 +65,27 @@ const ProfileIcon = () => {
           <Close color="primary" />
         </MenuItem>
         <Divider /> */}
-        {isLoggedIn ? (
-          <>
-            <MenuItem>
-              <Typography fontWeight="bold">
-                Logged in as {user?.displayName}
-              </Typography>
-            </MenuItem>
-            <Divider />
-            <MenuItem
-              onClick={() => {
-                logout();
-                handleClose();
-              }}
-            >
-              <Typography color="primary" padding="0.5rem">
-                Log Out
-              </Typography>
-            </MenuItem>
-          </>
-        ) : (
+        {isLoggedIn && (
+          <MenuItem>
+            <Typography fontWeight="bold">
+              Logged in as {user?.displayName}
+            </Typography>
+          </MenuItem>
+        )}
+        <Divider />
+        {isLoggedIn && (
+          <MenuItem
+            onClick={() => {
+              logout();
+              handleClose();
+            }}
+          >
+            <Typography color="primary" padding="0.5rem">
+              Log Out
+            </Typography>
+          </MenuItem>
+        )}
+        {!isLoggedIn && (
           <MenuItem
             onClick={() => {
               openModal(<LoginForm />);
