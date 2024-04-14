@@ -13,5 +13,11 @@ namespace Persistence
         public DbSet<Item> Items { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Like>(x => x.HasKey(l => new { l.AppUserId, l.ItemId }));
+        }
     }
 }

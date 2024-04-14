@@ -14,5 +14,6 @@ namespace Domain
         public List<Photo> Images { get; set; }
         public double Price { get; set; }
         public double PriceSale { get; set; }
+        public ICollection<Like> UserLikes { get; set; } = new List<Like>();
     }
 }

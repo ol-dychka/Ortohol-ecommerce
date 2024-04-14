@@ -13,8 +13,7 @@ namespace Application.Items
         // return stripe session key or whatever
         public class Command : IRequest<Result<StripeCheckoutSessionResult>>
         {
-            public string UserName { get; set; }
-            public string Email { get; set; }
+            public AppUser User { get; set; }
             public List<OrderItem> Items { get; set; }
         }
 
@@ -52,8 +51,8 @@ namespace Application.Items
 
                 var options = new SessionCreateOptions
                 {
-                    SuccessUrl = "https://localhost:5173/success",
-                    CancelUrl = "https://localhost:5173/failure",
+                    SuccessUrl = "http://localhost:5173/success",
+                    CancelUrl = "http://localhost:5173/failure",
                     PaymentMethodTypes = new List<string>{
                     "card",
                 },
@@ -67,8 +66,7 @@ namespace Application.Items
                 // db
                 _context.Orders.Add(new Domain.Order
                 {
-                    Username = request.UserName,
-                    Email = request.Email,
+                    User = request.User,
                     StripeSessionId = session.Id,
                     Items = request.Items
                 });

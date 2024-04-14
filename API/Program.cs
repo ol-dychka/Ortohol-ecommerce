@@ -1,6 +1,8 @@
 using API.Extensions;
 using Application.Core;
+using Application.Interfaces;
 using Domain;
+using Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,8 @@ builder.Services.AddCors(opt =>
         policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:5173");
     });
 });
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserAccessor, UserAccessor>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 StripeConfiguration.ApiKey = builder.Configuration.GetValue<string>("StripeApiKey");
