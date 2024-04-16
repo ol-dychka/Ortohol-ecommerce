@@ -13,6 +13,7 @@ import {
   AddOutlined,
   CheckOutlined,
   FavoriteBorderOutlined,
+  FavoriteOutlined,
   KeyboardArrowDownOutlined,
   KeyboardArrowUpOutlined,
   RemoveOutlined,
@@ -29,7 +30,7 @@ const ItemCard = ({ item }: Props) => {
   const theme = useTheme();
 
   const {
-    itemStore: { addToCart },
+    itemStore: { addToCart, setLiked },
   } = useStore();
 
   const [quantity, setQuantity] = useState(1);
@@ -64,8 +65,12 @@ const ItemCard = ({ item }: Props) => {
             width="200px"
           />
           <Box position="absolute" top="8%" right="8%">
-            <IconButton>
-              <FavoriteBorderOutlined />
+            <IconButton onClick={() => setLiked(item, item.liked)}>
+              {item.liked ? (
+                <FavoriteOutlined color="primary" />
+              ) : (
+                <FavoriteBorderOutlined />
+              )}
             </IconButton>
           </Box>
         </FlexBetween>

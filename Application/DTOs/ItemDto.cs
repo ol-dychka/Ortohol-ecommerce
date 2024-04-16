@@ -16,6 +16,7 @@ namespace Application.DTOs
         public List<string> Images { get; set; }
         public double Price { get; set; }
         public double PriceSale { get; set; }
+        public bool Liked { get; set; }
 
         // public ItemDto(Item item) {
         //     Id = item.Id;

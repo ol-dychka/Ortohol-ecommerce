@@ -10,7 +10,6 @@ import {
 import {
   AppsRounded,
   ExpandMoreOutlined,
-  FavoriteBorderOutlined,
   MenuOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
@@ -27,12 +26,13 @@ import { useState } from "react";
 import NavbarCategoryOption from "../../reusable/NavbarCategoryOption";
 import { Category } from "../../models/Item";
 import ProfileIcon from "./ProfileIcon";
+import LikedIcon from "./LikedIcon";
 
 const Navbar = () => {
   const theme = useTheme();
 
   const {
-    itemStore: { openCart, cart, wasOpened },
+    itemStore: { openCart, cart, wasCartOpened },
     categoriesStore: { setCategory },
   } = useStore();
 
@@ -92,21 +92,13 @@ const Navbar = () => {
               </IconButton>
             </Box>
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
-            <StyledBadge badgeContent={3} color="secondary">
-              <IconButton
-                sx={{
-                  border: `0.25rem ${theme.palette.primary.main} solid`,
-                }}
-              >
-                <FavoriteBorderOutlined />
-              </IconButton>
-            </StyledBadge>
+            <LikedIcon />
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
             <ProfileIcon />
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
             <StyledBadge
               badgeContent={cart.length}
-              color={wasOpened ? "secondary" : "error"}
+              color={wasCartOpened ? "secondary" : "error"}
             >
               <FlexBetween
                 sx={{
@@ -193,7 +185,7 @@ const Navbar = () => {
             </Box>
             <StyledBadge
               badgeContent={cart.length}
-              color={wasOpened ? "secondary" : "error"}
+              color={wasCartOpened ? "secondary" : "error"}
             >
               <IconButton
                 sx={{

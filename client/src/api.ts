@@ -88,6 +88,8 @@ const Items = {
   single: (id: string) => requests.get<Item>(`/items/${id}`),
   order: (order: Order) =>
     requests.post<StripeCheckoutSessionResult>(`/items`, order),
+  likes: () => requests.get<Item[]>("/items/likes"),
+  like: (id: string) => requests.post(`/items/${id}/like`, {}),
 };
 
 const Users = {

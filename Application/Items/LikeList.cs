@@ -31,6 +31,7 @@ namespace Application.Items
                 var user = await _context.Users
                     .Include(u => u.ItemsLiked)
                     .ThenInclude(l => l.Item)
+                    .ThenInclude(p => p.Images)
                     .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName());
                 if (user == null) return null;
 

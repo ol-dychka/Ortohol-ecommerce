@@ -10,7 +10,7 @@ import { router } from "../Routes";
 
 const CartMenu = () => {
   const {
-    itemStore: { isOpen, cart, openCart },
+    itemStore: { isCartOpen, cart, openCart },
   } = useStore();
 
   const escPress = useCallback(
@@ -45,7 +45,7 @@ const CartMenu = () => {
 
   return (
     <Box
-      display={isOpen ? "block" : "none"}
+      display={isCartOpen ? "block" : "none"}
       bgcolor="rgba(0, 0, 0, 0.4)"
       position="fixed"
       zIndex={10}

@@ -12,7 +12,7 @@ export interface Item {
   price: number;
   priceSale: number;
   added: boolean;
-  favorite: boolean;
+  liked: boolean;
   leftCount: number;
 }
 

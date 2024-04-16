@@ -20,6 +20,17 @@ export default class userStore {
         }
       }
     );
+
+    reaction(
+      () => this.user,
+      (user) => {
+        if (user) {
+          store.itemStore.getLiked();
+        } else {
+          store.itemStore.clearLiked();
+        }
+      }
+    );
   }
 
   get isLoggedIn() {

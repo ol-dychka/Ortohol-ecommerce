@@ -1,5 +1,6 @@
 using Application.Core;
 using Application.DTOs;
+using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain;
@@ -20,8 +21,10 @@ namespace Application.Items
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
-            public Handler(DataContext context, IMapper mapper)
+            private readonly IUserAccessor _userAccessor;
+            public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
             {
+                _userAccessor = userAccessor;
                 _mapper = mapper;
                 _context = context;
             }
@@ -45,8 +48,22 @@ namespace Application.Items
                     query = query.Where(x => x.Price >= min && x.Price <= max);
                 }
 
+                var user = await _context.Users
+                    .Include(u => u.ItemsLiked)
+                    .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName());
+                if (user != null) {
+                    query = query.Select(i => SetLike(user.ItemsLiked, i));
+                }
+
                 return Result<PagedList<ItemDto>>.Success(await PagedList<ItemDto>
                     .CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));
+            }
+
+            public static ItemDto SetLike (ICollection<Domain.Like> likes, ItemDto item) {
+                if (likes.Any(l => l.ItemId == item.Id)){
+                    item.Liked = true;
+                }
+                return item;
             }
         }
     }

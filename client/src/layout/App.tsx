@@ -11,6 +11,7 @@ import { useEffect } from "react";
 function App() {
   const {
     userStore: { token, getUser },
+    itemStore: { getLiked },
   } = useStore();
 
   const theme = createTheme(themeSettings());
@@ -18,8 +19,9 @@ function App() {
   useEffect(() => {
     if (token) {
       getUser();
+      getLiked();
     }
-  }, [token, getUser]);
+  }, [token, getUser, getLiked]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -11,11 +11,16 @@ export default class itemStore {
   itemRegistry = new Map<string, Item>();
   loading = false;
   selectedItem: Item | undefined = undefined;
+
   cartRegistry = new Map<string, CartItem>();
-  isOpen = false;
-  wasOpened = false;
+  isCartOpen = false;
+  wasCartOpened = false;
+
   pagination: Pagination | null = null;
   pagingParams = new PagingParams();
+
+  likedRegistry = new Map<string, Item>();
+  likedLoading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -36,6 +41,10 @@ export default class itemStore {
     return Array.from(this.cartRegistry.values());
   }
 
+  get liked() {
+    return Array.from(this.likedRegistry.values());
+  }
+
   loadItems = async () => {
     this.loading = true;
     try {
@@ -44,11 +53,6 @@ export default class itemStore {
       runInAction(() => {
         this.itemRegistry.clear();
         result.data.data.forEach((item) => {
-          // console.log(
-          //   Array.from(this.cartRegistry.keys()).map((x) => x.slice(0, 36))
-          // );
-          // console.log("original id", item.id);
-
           // grabbing Item ID part from the unique cart key
           item.added = Array.from(this.cartRegistry.keys()).some(
             (x) => x.slice(0, 36) === item.id
@@ -106,7 +110,7 @@ export default class itemStore {
       this.cartRegistry.set(id, cartItem);
       this.setAdded(cartItem.item, true);
     }
-    this.wasOpened = false;
+    this.wasCartOpened = false;
   };
 
   deleteFromCart = (cartItem: CartItem) => {
@@ -173,8 +177,8 @@ export default class itemStore {
   };
 
   openCart = (state: boolean) => {
-    this.isOpen = state;
-    this.wasOpened = true;
+    this.isCartOpen = state;
+    this.wasCartOpened = true;
   };
 
   emptyCart = () => {
@@ -204,5 +208,45 @@ export default class itemStore {
       added: state,
     });
     if (this.selectedItem?.id === item.id) this.selectedItem.added = state;
+  };
+
+  setLiked = async (item: Item, wasLiked: boolean) => {
+    const id = item.id;
+    this.likedLoading = true;
+    try {
+      await api.Items.like(id);
+      runInAction(() => {
+        this.itemRegistry.set(id, { ...item, liked: !wasLiked });
+        if (wasLiked) {
+          this.likedRegistry.delete(id);
+        } else {
+          this.likedRegistry.set(id, item);
+        }
+        this.likedLoading = false;
+      });
+    } catch (err) {
+      console.log(err);
+      runInAction(() => (this.likedLoading = false));
+    }
+  };
+
+  getLiked = async () => {
+    this.likedLoading = true;
+    try {
+      const result = await api.Items.likes();
+      runInAction(() => {
+        this.likedLoading = false;
+        result.forEach((item) => {
+          this.likedRegistry.set(item.id, item);
+        });
+      });
+    } catch (err) {
+      console.log(err);
+      runInAction(() => (this.likedLoading = false));
+    }
+  };
+
+  clearLiked = () => {
+    this.likedRegistry.clear();
   };
 }
