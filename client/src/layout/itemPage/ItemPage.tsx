@@ -14,6 +14,8 @@ import { observer } from "mobx-react-lite";
 import {
   AddOutlined,
   CheckOutlined,
+  FavoriteBorderOutlined,
+  FavoriteOutlined,
   RemoveOutlined,
 } from "@mui/icons-material";
 import { CartItem } from "../../models/CartItem";
@@ -30,6 +32,7 @@ const ItemPage = () => {
       clearSelectedItem,
       addToCart,
       openCart,
+      setLiked,
     },
   } = useStore();
 
@@ -106,6 +109,13 @@ const ItemPage = () => {
               {item.price}$
             </Typography>
           )}
+          <IconButton onClick={() => setLiked(item, item.liked)}>
+            {item.liked ? (
+              <FavoriteOutlined color="primary" />
+            ) : (
+              <FavoriteBorderOutlined />
+            )}
+          </IconButton>
 
           {/* SIZE & COLOR CONFIG */}
           <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>

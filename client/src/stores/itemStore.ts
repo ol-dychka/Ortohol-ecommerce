@@ -217,6 +217,7 @@ export default class itemStore {
       await api.Items.like(id);
       runInAction(() => {
         this.itemRegistry.set(id, { ...item, liked: !wasLiked });
+        if (this.selectedItem) this.selectedItem.liked = !wasLiked;
         if (wasLiked) {
           this.likedRegistry.delete(id);
         } else {
