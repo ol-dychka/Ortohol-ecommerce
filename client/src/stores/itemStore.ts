@@ -48,6 +48,10 @@ export default class itemStore {
     return Array.from(this.likedRegistry.values());
   }
 
+  get orders() {
+    return Array.from(this.orderRegistry.values());
+  }
+
   loadItems = async () => {
     this.loading = true;
     try {
@@ -250,7 +254,7 @@ export default class itemStore {
     this.likedRegistry.clear();
   };
 
-  getOrders = async () => {
+  loadOrders = async () => {
     this.orderLoading = true;
     try {
       const result = await api.Items.orders();

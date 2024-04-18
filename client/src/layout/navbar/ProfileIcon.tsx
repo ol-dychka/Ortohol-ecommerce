@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { PersonOutlined } from "@mui/icons-material";
+import { Close, PersonOutlined } from "@mui/icons-material";
 import React from "react";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
@@ -59,13 +59,13 @@ const ProfileIcon = () => {
           horizontal: "left",
         }}
       >
-        {/* <MenuItem
+        <MenuItem
           onClick={handleClose}
           sx={{ display: "flex", justifyContent: "center" }}
         >
           <Close color="primary" />
         </MenuItem>
-        <Divider /> */}
+        <Divider />
         {isLoggedIn && (
           <MenuItem>
             <Typography fontWeight="bold">
