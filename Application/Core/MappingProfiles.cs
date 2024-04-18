@@ -10,8 +10,11 @@ namespace Application.Core
         {
             CreateMap<Item, ItemDto>()
                 .ForMember(d => d.Images, o => o.MapFrom(s => s.Images));
-            CreateMap<Photo, String>()
+            CreateMap<Photo, string>()
                 .ConvertUsing(r => r.Url);
+            CreateMap<Order, OrderDto>()
+                .ForMember(d => d.UserName, o => o.MapFrom(s => s.User.UserName));
+            CreateMap<OrderItem, OrderItemDto>();
         }
     }
 }

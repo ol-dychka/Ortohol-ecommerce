@@ -11,6 +11,7 @@ import CustomerInformation from "./navbarInfo/CustomerInformation";
 import Contact from "./navbarInfo/Contact";
 import CategoriesPage from "./categoriesPage/CategoriesPage";
 import LoginForm from "./users/LoginForm";
+import OrdersPage from "./ordersPage/OrdersPage";
 
 export const routes: RouteObject[] = [
   {
@@ -27,6 +28,7 @@ export const routes: RouteObject[] = [
       { path: "/contact", element: <Contact /> },
       { path: "/categories", element: <CategoriesPage /> },
       { path: "/login", element: <LoginForm /> },
+      { path: "/orders", element: <OrdersPage /> },
     ],
   },
 ];

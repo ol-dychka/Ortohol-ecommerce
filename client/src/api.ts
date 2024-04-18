@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Category, Item } from "./models/Item";
-import { Order } from "./models/OrderItem";
+import { Order, OrderItem } from "./models/OrderItem";
 import StripeCheckoutSessionResult from "./models/StripeCheckoutSessionResult";
 import { PaginatedResult } from "./models/Pagination";
 import PriceRange from "./models/PriceRange";
@@ -86,8 +86,9 @@ const Items = {
   priceRange: (category: Category) =>
     requests.get<PriceRange>(`/items/${category}/range`),
   single: (id: string) => requests.get<Item>(`/items/${id}`),
-  order: (order: Order) =>
-    requests.post<StripeCheckoutSessionResult>(`/items`, order),
+  order: (orderItems: OrderItem[]) =>
+    requests.post<StripeCheckoutSessionResult>(`/items`, orderItems),
+  orders: () => requests.get<Order[]>("/items/orders"),
   likes: () => requests.get<Item[]>("/items/likes"),
   like: (id: string) => requests.post(`/items/${id}/like`, {}),
 };

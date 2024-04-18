@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { Item } from "../models/Item";
 import api from "../api";
 import { CartItem } from "../models/CartItem";
-import { CheckoutFormValues } from "../models/CheckoutFormValues";
+// import { CheckoutFormValues } from "../models/CheckoutFormValues";
 import { loadStripe } from "@stripe/stripe-js";
 import { Order, OrderItem } from "../models/OrderItem";
 import { Pagination, PagingParams } from "../models/Pagination";
@@ -21,6 +21,9 @@ export default class itemStore {
 
   likedRegistry = new Map<string, Item>();
   likedLoading = false;
+
+  orderRegistry = new Map<string, Order>();
+  orderLoading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -185,17 +188,13 @@ export default class itemStore {
     this.cartRegistry.clear();
   };
 
-  makePayment = async (values: CheckoutFormValues) => {
+  makePayment = async () => {
     // getting stripe public key
     const stripe = await loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
     // making new order to give to back-end
-    const order = new Order(
-      `${values.billingAddress.firstName} ${values.billingAddress.lastName}`,
-      values.email,
-      this.cart.map((cartItem) => new OrderItem(cartItem))
-    );
+    const orderItems = this.cart.map((cartItem) => new OrderItem(cartItem));
     // making a call to back-end and getting back session key
-    await api.Items.order(order).then((session) =>
+    await api.Items.order(orderItems).then((session) =>
       stripe?.redirectToCheckout({
         sessionId: session.sessionId,
       })
@@ -236,10 +235,10 @@ export default class itemStore {
     try {
       const result = await api.Items.likes();
       runInAction(() => {
-        this.likedLoading = false;
         result.forEach((item) => {
           this.likedRegistry.set(item.id, item);
         });
+        this.likedLoading = false;
       });
     } catch (err) {
       console.log(err);
@@ -249,5 +248,23 @@ export default class itemStore {
 
   clearLiked = () => {
     this.likedRegistry.clear();
+  };
+
+  getOrders = async () => {
+    this.orderLoading = true;
+    try {
+      const result = await api.Items.orders();
+      result.forEach((order) => {
+        this.orderRegistry.set(order.id, order);
+      });
+      runInAction(() => (this.orderLoading = false));
+    } catch (err) {
+      console.log(err);
+      runInAction(() => (this.orderLoading = false));
+    }
+  };
+
+  clearOrders = () => {
+    this.orderRegistry.clear();
   };
 }

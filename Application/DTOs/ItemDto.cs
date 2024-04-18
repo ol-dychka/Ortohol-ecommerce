@@ -17,20 +17,5 @@ namespace Application.DTOs
         public double Price { get; set; }
         public double PriceSale { get; set; }
         public bool Liked { get; set; }
-
-        // public ItemDto(Item item) {
-        //     Id = item.Id;
-        //     Name = item.Name;
-        //     Description = item.Description;
-        //     Details = item.Details;
-        //     Sizes = item.Sizes;
-        //     Colors = item.Colors;
-        //     Genders = item.Genders;
-        //     CompressionClasses = item.CompressionClasses;
-        //     Category = item.Category;
-        //     Images = item.Images.Select(image => image.Url).ToList();
-        //     Price = item.Price;
-        //     PriceSale = item.PriceSale;
-        // }
     }
 }

@@ -16,16 +16,16 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ItemDto>> GetPost(Guid id)
+        public async Task<ActionResult<ItemDto>> GetPost(Guid id) 
         {
             return HandleResult(await Mediator.Send(new Application.Items.Single.Query { Id = id }));
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<StripeCheckoutSessionResult>> Order(Domain.Order order)
+        public async Task<ActionResult<StripeCheckoutSessionResult>> Order(List<OrderItem> orderItems)
         {
-            return HandleResult(await Mediator.Send(new Application.Items.Order.Command { User = order.User, Items = order.Items }));
+            return HandleResult(await Mediator.Send(new Application.Items.Order.Command { Items = orderItems }));
         }
 
         [HttpGet("{category}/range")]
@@ -35,9 +35,16 @@ namespace API.Controllers
         }
 
         [Authorize]
+        [HttpGet("orders")]
+        public async Task<ActionResult<ItemPriceRange>> GetOrders()
+        {
+            return HandleResult(await Mediator.Send(new OrderList.Query {}));
+        }
+
+        [Authorize]
         [HttpPost("{id}/like")]
         public async Task<IActionResult> Like(Guid id){
-            return HandleResult(await Mediator.Send(new Application.Items.Like.Command {Id = id }));
+            return HandleResult(await Mediator.Send(new Application.Items.Like.Command { Id = id }));
         }
 
         [Authorize]

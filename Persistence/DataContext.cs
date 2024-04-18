@@ -18,6 +18,7 @@ namespace Persistence
             base.OnModelCreating(builder);
 
             builder.Entity<Like>(x => x.HasKey(l => new { l.AppUserId, l.ItemId }));
+            builder.Entity<OrderItem>(x => x.HasKey(l => l.Id));
         }
     }
 }

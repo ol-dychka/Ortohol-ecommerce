@@ -12,6 +12,7 @@ import React from "react";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import LoginForm from "../users/LoginForm";
+import { router } from "../Routes";
 
 const ProfileIcon = () => {
   const theme = useTheme();
@@ -70,6 +71,14 @@ const ProfileIcon = () => {
             <Typography fontWeight="bold">
               Logged in as {user?.displayName}
             </Typography>
+          </MenuItem>
+        )}
+        <Divider />
+        {isLoggedIn && (
+          <MenuItem
+            onClick={() => router.navigate("/orders").then(() => handleClose())}
+          >
+            <Typography fontWeight="bold">My Orders</Typography>
           </MenuItem>
         )}
         <Divider />

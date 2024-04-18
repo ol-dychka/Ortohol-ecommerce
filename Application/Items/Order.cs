@@ -1,4 +1,5 @@
 using Application.Core;
+using Application.Interfaces;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,19 +11,19 @@ namespace Application.Items
 {
     public class Order
     {
-        // return stripe session key or whatever
+        // return stripe session key
         public class Command : IRequest<Result<StripeCheckoutSessionResult>>
         {
-            public AppUser User { get; set; }
             public List<OrderItem> Items { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<StripeCheckoutSessionResult>>
         {
-
+            private readonly IUserAccessor _userAccessor;
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            public Handler(DataContext context, IUserAccessor userAccessor)
             {
+                _userAccessor = userAccessor;
                 _context = context;
             }
 
@@ -30,11 +31,11 @@ namespace Application.Items
             {
                 //strapi
                 var lineItems = new List<SessionLineItemOptions>();
-                foreach (OrderItem orderItem in request.Items)
+                foreach (var orderItem in request.Items)
                 {
-                    var item = await _context.Items.FirstOrDefaultAsync(x => x.Id.ToString() == orderItem.ItemId);
+                    var item = await _context.Items.FirstOrDefaultAsync(x => x.Id == orderItem.ItemId);
                     var lineItem = new SessionLineItemOptions
-                    {
+                    {   
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             Currency = "usd",
@@ -63,16 +64,20 @@ namespace Application.Items
                 var service = new SessionService();
                 var session = await service.CreateAsync(options);
 
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName());
+                if (user == null) return Result<StripeCheckoutSessionResult>.Failure("User is not logged in");
+
                 // db
                 _context.Orders.Add(new Domain.Order
                 {
-                    User = request.User,
+                    User = user,
                     StripeSessionId = session.Id,
                     Items = request.Items
                 });
 
                 var result = await _context.SaveChangesAsync() > 0;
-                return result ? Result<StripeCheckoutSessionResult>.Success(new StripeCheckoutSessionResult { SessionId = session.Id }) : Result<StripeCheckoutSessionResult>.Failure("Colud not make an order");
+                return result ? Result<StripeCheckoutSessionResult>.Success(new StripeCheckoutSessionResult { SessionId = session.Id }) : Result<StripeCheckoutSessionResult>.Failure("Could not make an order");
             }
         }
     }
