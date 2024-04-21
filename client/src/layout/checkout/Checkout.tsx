@@ -115,7 +115,7 @@ const Checkout = () => {
     }
 
     if (activeStep === 1) {
-      makePayment(values);
+      makePayment();
     }
 
     actions.setTouched({});

@@ -1,5 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
 import { themeSettings } from "../theme";
 import Footer from "./Footer";
@@ -7,10 +8,11 @@ import CartMenu from "./cart/CartMenu";
 import ModalContainer from "../reusable/ModalContainer";
 import { useStore } from "../stores/store";
 import { useEffect } from "react";
+import { observer } from "mobx-react-lite";
 
 function App() {
   const {
-    userStore: { token, getUser },
+    userStore: { token, getUser, appLoaded, setAppLoaded },
     itemStore: { getLiked },
   } = useStore();
 
@@ -18,10 +20,14 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      getUser();
+      getUser().finally(() => setAppLoaded());
       getLiked();
+    } else {
+      setAppLoaded();
     }
-  }, [token, getUser, getLiked]);
+  }, [token, getUser, getLiked, appLoaded, setAppLoaded]);
+
+  if (!appLoaded) return <Box>loading...</Box>;
 
   return (
     <ThemeProvider theme={theme}>
@@ -37,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

@@ -7,7 +7,7 @@ import PriceRange from "./models/PriceRange";
 import { User, UserFormValues } from "./models/User";
 import { store } from "./stores/store";
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = import.meta.env.VITE_APP_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 

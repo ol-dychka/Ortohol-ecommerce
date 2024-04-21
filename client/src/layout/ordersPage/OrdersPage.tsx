@@ -4,10 +4,12 @@ import { useStore } from "../../stores/store";
 import { Box, CircularProgress, Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
 import OrderCard from "./OrderCard";
+import { router } from "../Routes";
 
 const OrdersPage = () => {
   const {
     itemStore: { orderLoading, orders, loadOrders, clearOrders },
+    userStore: { user },
   } = useStore();
 
   useEffect(() => {
@@ -15,6 +17,8 @@ const OrdersPage = () => {
 
     return () => clearOrders();
   }, [loadOrders, clearOrders]);
+
+  if (!user) router.navigate("/");
 
   return (
     <Box>
@@ -28,10 +32,10 @@ const OrdersPage = () => {
       ) : (
         <Box>
           {orders.map((order) => (
-            <Box m="1rem" mb="3rem">
+            <Box m="1rem" mb="3rem" key={order.id}>
               <Typography variant="h5">Order #{order.id}</Typography>
               {order.items.map((item) => (
-                <OrderCard item={item} />
+                <OrderCard key={item.item?.id} item={item} />
               ))}
               <Typography variant="h4" fontWeight="bold">
                 Total:{" "}

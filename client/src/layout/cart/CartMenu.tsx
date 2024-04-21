@@ -7,10 +7,13 @@ import { CloseOutlined } from "@mui/icons-material";
 import { useCallback, useEffect } from "react";
 import CartItemCard from "./CartItemCard";
 import { router } from "../Routes";
+import LoginForm from "../users/LoginForm";
 
 const CartMenu = () => {
   const {
     itemStore: { isCartOpen, cart, openCart },
+    userStore: { isLoggedIn },
+    modalStore: { openModal },
   } = useStore();
 
   const escPress = useCallback(
@@ -88,9 +91,20 @@ const CartMenu = () => {
             onClick={() =>
               router.navigate("/checkout").then(() => openCart(false))
             }
+            disabled={!isLoggedIn}
           >
             Checkout
           </Button>
+        )}
+        {!isLoggedIn && (
+          <Typography
+            color="primary"
+            onClick={() => openModal(<LoginForm />)}
+            textAlign="center"
+            sx={{ cursor: "pointer" }}
+          >
+            Log in to Proceed
+          </Typography>
         )}
       </Box>
     </Box>

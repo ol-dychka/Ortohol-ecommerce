@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useEffect, useState } from "react";
 import { useStore } from "../../stores/store";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Button,

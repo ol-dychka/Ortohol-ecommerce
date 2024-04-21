@@ -6,6 +6,7 @@ import { store } from "./store";
 export default class userStore {
   user: User | null = null;
   token: string | null = localStorage.getItem("jwt");
+  appLoaded = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -67,5 +68,9 @@ export default class userStore {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  setAppLoaded = () => {
+    this.appLoaded = true;
   };
 }
