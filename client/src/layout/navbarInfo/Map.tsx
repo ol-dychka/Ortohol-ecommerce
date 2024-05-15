@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 const Map = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLEMAPS_API_KEY,
+    googleMapsApiKey: `${import.meta.env.VITE_GOOGLEMAPS_API_KEY}`,
   });
   const center = useMemo(
     () => ({ lat: 43.64257307562227, lng: -79.38705701377728 }),

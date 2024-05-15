@@ -194,7 +194,11 @@ export default class itemStore {
 
   makePayment = async () => {
     // getting stripe public key
-    const stripe = await loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
+    const stripe = await loadStripe(
+      "pk_test_51N11SGBFUFAjc34BQt3itoHm7xnXCpvG1anMY0BsSWYCmkXm6NiLEMOhifa8qbYemql0eX12D2t03bNZ3nOJLcfT00QfWfV4Ee"
+    );
+    // const stripe = await loadStripe(`${import.meta.env.VITE_PUBLISHABLE_KEY}`);
+
     // making new order to give to back-end
     const orderItems = this.cart.map((cartItem) => new OrderItem(cartItem));
     // making a call to back-end and getting back session key

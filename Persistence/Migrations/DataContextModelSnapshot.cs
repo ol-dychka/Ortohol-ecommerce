@@ -128,7 +128,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("Domain.Like", b =>
@@ -143,7 +143,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Like", (string)null);
+                    b.ToTable("Like");
                 });
 
             modelBuilder.Entity("Domain.Order", b =>
@@ -162,7 +162,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Domain.OrderItem", b =>
@@ -180,7 +180,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("ItemId")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("OrderId")
@@ -198,7 +198,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>
@@ -216,7 +216,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Photos", (string)null);
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -383,7 +383,9 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Item", "Item")
                         .WithMany()
-                        .HasForeignKey("ItemId");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Order", null)
                         .WithMany("Items")

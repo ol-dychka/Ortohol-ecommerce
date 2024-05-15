@@ -34,7 +34,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserAccessor, UserAccessor>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-StripeConfiguration.ApiKey = builder.Configuration.GetValue<string>("StripeApiKey");
+// StripeConfiguration.ApiKey = builder.Configuration.GetValue<string>("StripeApiKey");
+// StripeConfiguration.ApiKey = builder.Configuration["StripeApiKey"];
+StripeConfiguration.ApiKey = "sk_test_51N11SGBFUFAjc34BNR0Bo86R13ew2dDC85brFJCKs9Pm5yoXjuMN6sWURqysZvqPAZuGfQo0Q3FNq6T8WYmLF9fV00P0aYM1td";
 
 var app = builder.Build();
 

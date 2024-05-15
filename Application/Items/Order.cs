@@ -18,7 +18,12 @@ namespace Application.Items
         }
 
         public class Handler : IRequestHandler<Command, Result<StripeCheckoutSessionResult>>
-        {
+        {    
+            // RequestOptions requestOptions = new()
+            // {
+            //     ApiKey = "sk_test_51N11SGBFUFAjc34BNR0Bo86R13ew2dDC85brFJCKs9Pm5yoXjuMN6sWURqysZvqPAZuGfQo0Q3FNq6T8WYmLF9fV00P0aYM1td"
+            // };
+
             private readonly IUserAccessor _userAccessor;
             private readonly DataContext _context;
             public Handler(DataContext context, IUserAccessor userAccessor)
@@ -52,17 +57,16 @@ namespace Application.Items
 
                 var options = new SessionCreateOptions
                 {
-                    SuccessUrl = "http://localhost:5173/success",
-                    CancelUrl = "http://localhost:5173/failure",
-                    PaymentMethodTypes = new List<string>{
-                    "card",
-                },
+                    SuccessUrl = "http://bogkrovi-env.eba-gk3zcthi.us-east-2.elasticbeanstalk.com/success",
+                    CancelUrl = "http://bogkrovi-env.eba-gk3zcthi.us-east-2.elasticbeanstalk.com/failure",
+                    PaymentMethodTypes = new List<string>{ "card" },
                     Mode = "payment",
                     LineItems = lineItems,
                 };
 
                 var service = new SessionService();
-                var session = await service.CreateAsync(options);
+                var session = await service.CreateAsync(options );
+                // var session = await service.CreateAsync(options, requestOptions );
 
                 var user = await _context.Users
                     .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName());

@@ -13,8 +13,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240411020114_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20240423025423_InitialHost")]
+    partial class InitialHost
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,25 +134,36 @@ namespace Persistence.Migrations
                     b.ToTable("Items");
                 });
 
+            modelBuilder.Entity("Domain.Like", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("AppUserId", "ItemId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("Like");
+                });
+
             modelBuilder.Entity("Domain.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MobileNumber")
-                        .HasColumnType("text");
-
                     b.Property<string>("StripeSessionId")
                         .HasColumnType("text");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -172,8 +183,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("text");
 
-                    b.Property<string>("ItemId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("uuid");
@@ -185,6 +196,8 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.HasIndex("OrderId");
 
@@ -341,11 +354,47 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Like", b =>
+                {
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithMany("ItemsLiked")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Item", "Item")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("Domain.Order", b =>
+                {
+                    b.HasOne("Domain.AppUser", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.OrderItem", b =>
                 {
+                    b.HasOne("Domain.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Order", null)
                         .WithMany("Items")
                         .HasForeignKey("OrderId");
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>
@@ -406,9 +455,18 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.AppUser", b =>
+                {
+                    b.Navigation("ItemsLiked");
+
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("Domain.Item", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("UserLikes");
                 });
 
             modelBuilder.Entity("Domain.Order", b =>
