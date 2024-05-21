@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Category } from "../../models/Item";
 import CategoryButton from "./CategoryButton";
 import PriceRange from "../../models/PriceRange";
+import PaginationPanel from "../../reusable/PaginationPanel";
 
 const CategoriesPage = () => {
   const {
@@ -22,6 +23,7 @@ const CategoriesPage = () => {
       setPagingParams,
       pagination,
       priceRange,
+      clearItems,
     },
   } = useStore();
 
@@ -46,6 +48,8 @@ const CategoriesPage = () => {
     loadPriceRange().then((priceRange) => {
       if (priceRange) setPrice([priceRange.min, priceRange.max]);
     });
+
+    return () => clearItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadItems, category]);
 
@@ -100,36 +104,7 @@ const CategoriesPage = () => {
               ))}
             </Box>
             {pagination && (
-              <FlexBetween gap="1rem">
-                <Button
-                  variant="contained"
-                  onClick={() => getPage(pagination!.currentPage - 1)}
-                  disabled={pagination.currentPage === 1}
-                >
-                  {"<"}
-                </Button>
-                <FlexBetween gap="0.5rem">
-                  {Array.from(
-                    { length: pagination!.totalPages },
-                    (_, i) => i + 1
-                  ).map((pageNumber) => (
-                    <Button
-                      key={pageNumber}
-                      variant="contained"
-                      onClick={() => getPage(pageNumber)}
-                    >
-                      {pageNumber}
-                    </Button>
-                  ))}
-                </FlexBetween>
-                <Button
-                  variant="contained"
-                  onClick={() => getPage(pagination!.currentPage + 1)}
-                  disabled={pagination.currentPage === pagination.totalPages}
-                >
-                  {">"}
-                </Button>
-              </FlexBetween>
+              <PaginationPanel getPage={getPage} pagination={pagination} />
             )}
           </>
         )}

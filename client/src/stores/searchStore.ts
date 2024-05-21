@@ -1,17 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { Category, Item } from "../models/Item";
+import { Item } from "../models/Item";
 import { Pagination, PagingParams } from "../models/Pagination";
 import { store } from "./store";
 import api from "../api";
-import PriceRange from "../models/PriceRange";
 
-export default class categoriesStore {
+export default class searchStore {
   itemRegistry = new Map<string, Item>();
   loading = false;
   pagination: Pagination | null = null;
   pagingParams = new PagingParams();
-  category = Category.bandage_arm;
-  priceRange: PriceRange | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -21,7 +18,6 @@ export default class categoriesStore {
     const params = new URLSearchParams();
     params.append("pageNumber", this.pagingParams.pageNumber.toString());
     params.append("pageSize", this.pagingParams.pageSize.toString());
-    params.append("category", this.category);
     return params;
   }
 
@@ -29,13 +25,12 @@ export default class categoriesStore {
     return Array.from(this.itemRegistry.values());
   }
 
-  loadItems = async (price?: PriceRange) => {
+  loadItems = async (searchWord: string) => {
     this.loading = true;
     try {
       const params = this.axiosParams;
-      if (price) {
-        params.append("priceMin", price.min.toString().replace(".", ","));
-        params.append("priceMax", price.max.toString().replace(".", ","));
+      if (searchWord) {
+        params.append("searchWord", searchWord);
       }
       console.log(params);
       const result = await api.Items.list(params);
@@ -62,21 +57,7 @@ export default class categoriesStore {
     this.itemRegistry.clear();
   };
 
-  loadPriceRange = async () => {
-    try {
-      const result = await api.Items.priceRange(this.category);
-      runInAction(() => (this.priceRange = result));
-      return result;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   setPagingParams = (pagingParams: PagingParams) => {
     this.pagingParams = pagingParams;
-  };
-
-  setCategory = (category: Category) => {
-    this.category = category;
   };
 }

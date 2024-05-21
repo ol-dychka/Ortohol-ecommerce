@@ -14,14 +14,13 @@ import MessageWidget from "../MessageWidget";
 import FlexBetween from "../../reusable/FlexBetween";
 import ItemCard from "./ItemCard";
 import { PagingParams } from "../../models/Pagination";
+import PaginationPanel from "../../reusable/PaginationPanel";
 
 const ItemsDashboard = () => {
   const isMobile = useMediaQuery("(max-width:900px)");
 
   const {
     itemStore: { loadItems, loading, items, setPagingParams, pagination },
-    // make an arrow to go to next/prev pages and
-    // trigger setPagingParams with argument pagination[page] +- 1
   } = useStore();
 
   const getPage = (pageNumber: number) => {
@@ -33,7 +32,6 @@ const ItemsDashboard = () => {
     loadItems();
   }, [loadItems]);
 
-  // if (loading || !pagination) return <Box p="10rem">loading...</Box>;
   return (
     <Box>
       <Box position="relative">
@@ -62,12 +60,7 @@ const ItemsDashboard = () => {
       </Box>
 
       <FlexBetween flexDirection={isMobile ? "column" : "row"}>
-        <Typography variant="h3">Recommended</Typography>
-        <ButtonGroup variant="text">
-          <Button>All</Button>
-          <Button>Featured</Button>
-          <Button>Top Sellers</Button>
-        </ButtonGroup>
+        <Typography variant="h3">Recommended Items</Typography>
       </FlexBetween>
       {loading || !pagination ? (
         <Box height="900px" flex="center" alignItems="center" width="100%">
@@ -87,36 +80,7 @@ const ItemsDashboard = () => {
               <ItemCard key={item.id} item={item} />
             ))}
           </Box>
-          <FlexBetween gap="1rem">
-            <Button
-              variant="contained"
-              onClick={() => getPage(pagination!.currentPage - 1)}
-              disabled={pagination.currentPage === 1}
-            >
-              {"<"}
-            </Button>
-            <FlexBetween gap="0.5rem">
-              {Array.from(
-                { length: pagination!.totalPages },
-                (_, i) => i + 1
-              ).map((pageNumber) => (
-                <Button
-                  key={pageNumber}
-                  variant="contained"
-                  onClick={() => getPage(pageNumber)}
-                >
-                  {pageNumber}
-                </Button>
-              ))}
-            </FlexBetween>
-            <Button
-              variant="contained"
-              onClick={() => getPage(pagination!.currentPage + 1)}
-              disabled={pagination.currentPage === pagination.totalPages}
-            >
-              {">"}
-            </Button>
-          </FlexBetween>
+          <PaginationPanel getPage={getPage} pagination={pagination} />
         </>
       )}
 

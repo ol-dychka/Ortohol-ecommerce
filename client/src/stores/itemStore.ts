@@ -52,6 +52,14 @@ export default class itemStore {
     return Array.from(this.orderRegistry.values());
   }
 
+  get cartTotal() {
+    return this.cart.reduce((acc, curr) => {
+      const price =
+        curr.item.priceSale > 0 ? curr.item.priceSale : curr.item.price;
+      return acc + curr.quantity * price;
+    }, 0);
+  }
+
   loadItems = async () => {
     this.loading = true;
     try {
@@ -194,10 +202,10 @@ export default class itemStore {
 
   makePayment = async () => {
     // getting stripe public key
+    // keys should be kept in secrets manager
     const stripe = await loadStripe(
       "pk_test_51N11SGBFUFAjc34BQt3itoHm7xnXCpvG1anMY0BsSWYCmkXm6NiLEMOhifa8qbYemql0eX12D2t03bNZ3nOJLcfT00QfWfV4Ee"
     );
-    // const stripe = await loadStripe(`${import.meta.env.VITE_PUBLISHABLE_KEY}`);
 
     // making new order to give to back-end
     const orderItems = this.cart.map((cartItem) => new OrderItem(cartItem));

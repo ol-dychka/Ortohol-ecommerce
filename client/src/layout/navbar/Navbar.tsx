@@ -11,13 +11,9 @@ import {
   AppsRounded,
   ExpandMoreOutlined,
   MenuOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
 } from "@mui/icons-material";
 import Sticky from "react-sticky-el";
-import StyledBadge from "../../reusable/StyledBadge";
 import FlexBetween from "../../reusable/FlexBetween";
-import NavbarIconButton from "../../reusable/NavbarIconButton";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import { router } from "../Routes";
@@ -27,12 +23,13 @@ import NavbarCategoryOption from "../../reusable/NavbarCategoryOption";
 import { Category } from "../../models/Item";
 import ProfileIcon from "./ProfileIcon";
 import LikedIcon from "./LikedIcon";
+import Searchbar from "./Searchbar";
+import CartIcon from "./CartIcon";
 
 const Navbar = () => {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const {
-    itemStore: { openCart, cart, wasCartOpened },
     categoriesStore: { setCategory },
   } = useStore();
 
@@ -66,60 +63,13 @@ const Navbar = () => {
         </Typography>
         {!isMobile && (
           <>
-            <Box
-              bgcolor="secondary.main"
-              width="100%"
-              height="3rem"
-              borderRadius="1.75rem"
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              padding="0 0.25rem"
-            >
-              <Typography ml="1rem" color="secondary.dark">
-                Search
-              </Typography>
-              <IconButton
-                sx={{
-                  bgcolor: "primary.main",
-                  "&:hover": {
-                    bgcolor: "primary.light",
-                  },
-                  color: "primary.contrastText",
-                }}
-              >
-                <SearchOutlined />
-              </IconButton>
-            </Box>
+            <Searchbar />
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
             <LikedIcon />
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
             <ProfileIcon />
             <Divider orientation="vertical" sx={{ height: "1rem" }} />
-            <StyledBadge
-              badgeContent={cart.length}
-              color={wasCartOpened ? "secondary" : "error"}
-            >
-              <FlexBetween
-                sx={{
-                  border: `0.25rem ${theme.palette.primary.main} solid`,
-                }}
-                borderRadius="6rem"
-                bgcolor="primary.main"
-                gap="1rem"
-              >
-                <NavbarIconButton onClick={() => openCart(true)}>
-                  <ShoppingCartOutlined />
-                </NavbarIconButton>
-                <Typography
-                  mr="0.5rem"
-                  color="primary.contrastText"
-                  fontWeight="700"
-                >
-                  0.00 $
-                </Typography>
-              </FlexBetween>
-            </StyledBadge>
+            <CartIcon />
           </>
         )}
       </Box>
@@ -158,44 +108,8 @@ const Navbar = () => {
             >
               <MenuOutlined />
             </IconButton>
-            <Box
-              bgcolor="primary.light"
-              width="100%"
-              height="3rem"
-              borderRadius="1.75rem"
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              padding="0 0.25rem"
-            >
-              <Typography ml="1rem" color="secondary.dark">
-                Search
-              </Typography>
-              <IconButton
-                sx={{
-                  bgcolor: "primary.contrastText",
-                  "&:hover": {
-                    bgcolor: "secondary.main",
-                  },
-                  color: "primary.main",
-                }}
-              >
-                <SearchOutlined />
-              </IconButton>
-            </Box>
-            <StyledBadge
-              badgeContent={cart.length}
-              color={wasCartOpened ? "secondary" : "error"}
-            >
-              <IconButton
-                sx={{
-                  color: "primary.contrastText",
-                }}
-                onClick={() => openCart(true)}
-              >
-                <ShoppingCartOutlined />
-              </IconButton>
-            </StyledBadge>
+            <Searchbar />
+            <CartIcon />
           </Box>
         ) : (
           // PC view
@@ -259,7 +173,7 @@ const Navbar = () => {
               sx={{ height: "1rem", bgcolor: "primary.light" }}
             />
             <Typography onClick={() => router.navigate("/")}>Home</Typography>
-            <Typography>Our Products</Typography>
+            {/* <Typography>Our Products</Typography> */}
             <Typography onClick={() => router.navigate("/customer-info")}>
               Customer Information
             </Typography>

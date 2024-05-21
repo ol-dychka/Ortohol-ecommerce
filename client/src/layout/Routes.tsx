@@ -10,9 +10,9 @@ import Map from "./navbarInfo/Map";
 import CustomerInformation from "./navbarInfo/CustomerInformation";
 import Contact from "./navbarInfo/Contact";
 import CategoriesPage from "./categoriesPage/CategoriesPage";
-// import LoginForm from "./users/LoginForm";
 import OrdersPage from "./ordersPage/OrdersPage";
 import RequireAuthentification from "./RequireAuthentification";
+import SearchPage from "./searchPage/SearchPage";
 
 export const routes: RouteObject[] = [
   {
@@ -34,7 +34,7 @@ export const routes: RouteObject[] = [
       { path: "/customer-info", element: <CustomerInformation /> },
       { path: "/contact", element: <Contact /> },
       { path: "/categories", element: <CategoriesPage /> },
-      // { path: "/login", element: <LoginForm /> },
+      { path: "/search", element: <SearchPage /> },
     ],
   },
 ];

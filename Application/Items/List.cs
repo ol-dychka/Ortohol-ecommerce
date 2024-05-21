@@ -41,6 +41,12 @@ namespace Application.Items
                     query = query.Where(x => x.Category == request.Params.Category);
                 }
 
+                if (request.Params.SearchWord != null)
+                {
+                    // converting both strings to upper case to avoid case-sensitive input
+                    query = query.Where(x => x.Name.ToUpper().Contains(request.Params.SearchWord.ToUpper()));
+                }
+
                 if (request.Params.PriceMin != null && request.Params.PriceMax != null)
                 {
                     var min = Math.Floor(Convert.ToDouble(request.Params.PriceMin));
