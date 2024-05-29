@@ -1,8 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import {
   Box,
-  Button,
-  ButtonGroup,
   CircularProgress,
   Typography,
   useMediaQuery,
@@ -34,30 +32,32 @@ const ItemsDashboard = () => {
 
   return (
     <Box>
-      <Box position="relative">
-        <img
-          src="Orthopedics.png"
-          alt="main-banner"
-          height="100%"
-          width="100%"
-        />
-        <Box
-          position="absolute"
-          width="100%"
-          height="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          top="0"
-        >
-          <Typography
-            color="white"
-            sx={{ fontSize: "9rem", fontWeight: "semibold" }}
+      {!isMobile && (
+        <Box position="relative">
+          <img
+            src="Orthopedics.png"
+            alt="main-banner"
+            height="100%"
+            width="100%"
+          />
+          <Box
+            position="absolute"
+            width="100%"
+            height="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            top="0"
           >
-            ORTOHALL
-          </Typography>
+            <Typography
+              color="white"
+              sx={{ fontSize: "9rem", fontWeight: "semibold" }}
+            >
+              ORTOHALL
+            </Typography>
+          </Box>
         </Box>
-      </Box>
+      )}
 
       <FlexBetween flexDirection={isMobile ? "column" : "row"}>
         <Typography variant="h3">Recommended Items</Typography>

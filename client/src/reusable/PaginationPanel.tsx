@@ -9,7 +9,7 @@ type Props = {
 
 const PaginationPanel = ({ getPage, pagination }: Props) => {
   return (
-    <FlexBetween gap="1rem">
+    <FlexBetween gap="1rem" flexWrap="wrap">
       <Button
         variant="contained"
         onClick={() => getPage(pagination!.currentPage - 1)}
@@ -17,7 +17,7 @@ const PaginationPanel = ({ getPage, pagination }: Props) => {
       >
         {"<"}
       </Button>
-      <FlexBetween gap="0.5rem">
+      <FlexBetween gap="0.5rem" flexWrap="wrap">
         {Array.from({ length: pagination!.totalPages }, (_, i) => i + 1).map(
           (pageNumber) => (
             <Button

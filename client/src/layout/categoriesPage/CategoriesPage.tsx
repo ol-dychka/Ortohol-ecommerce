@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../stores/store";
-import { Box, Button, Slider, Typography } from "@mui/material";
+import { Box, Button, Slider, Typography, useMediaQuery } from "@mui/material";
 import ItemCard from "../itemsDashboard/ItemCard";
 import FlexBetween from "../../reusable/FlexBetween";
 import { PagingParams } from "../../models/Pagination";
@@ -12,6 +12,8 @@ import PriceRange from "../../models/PriceRange";
 import PaginationPanel from "../../reusable/PaginationPanel";
 
 const CategoriesPage = () => {
+  const isMobile = useMediaQuery("(max-width:900px)");
+
   const {
     categoriesStore: {
       items,
@@ -54,7 +56,11 @@ const CategoriesPage = () => {
   }, [loadItems, category]);
 
   return (
-    <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap="1rem">
+    <Box
+      display={isMobile ? "block" : "grid"}
+      gridTemplateColumns="repeat(4, 1fr)"
+      gap="1rem"
+    >
       <Box display="flex" flexDirection="column">
         {priceRange && (
           <Box>

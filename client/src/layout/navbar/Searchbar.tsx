@@ -16,6 +16,8 @@ const Searchbar = () => {
       justifyContent="space-between"
       alignItems="center"
       padding="0 0.25rem"
+      minWidth="10rem"
+      maxWidth="20rem"
     >
       <InputBase
         placeholder="Search"

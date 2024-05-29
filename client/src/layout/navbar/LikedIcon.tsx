@@ -18,6 +18,7 @@ import { observer } from "mobx-react-lite";
 import StyledBadge from "../../reusable/StyledBadge";
 import FlexBetween from "../../reusable/FlexBetween";
 import { router } from "../Routes";
+import NavbarIconButton from "../../reusable/NavbarIconButton";
 
 const LikedIcon = () => {
   const theme = useTheme();
@@ -41,7 +42,7 @@ const LikedIcon = () => {
         badgeContent={likedLoading ? 0 : liked.length}
         color="secondary"
       >
-        <IconButton
+        <NavbarIconButton
           disabled={!isLoggedIn}
           sx={{
             border: `0.25rem ${theme.palette.primary.main} solid`,
@@ -53,7 +54,7 @@ const LikedIcon = () => {
           onClick={handleClick}
         >
           <FavoriteBorderOutlined />
-        </IconButton>
+        </NavbarIconButton>
       </StyledBadge>
       <Menu
         id="demo-positioned-menu"
