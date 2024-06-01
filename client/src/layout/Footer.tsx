@@ -5,6 +5,9 @@ import {
   KeyboardArrowDownOutlined,
   KeyboardArrowUpOutlined,
 } from "@mui/icons-material";
+import { Category } from "../models/Item";
+import { router } from "./Routes";
+import { useStore } from "../stores/store";
 
 enum Section {
   Contacts = "con",
@@ -16,6 +19,10 @@ const Footer = () => {
   const isMobile = useMediaQuery("(max-width:700px)");
 
   const [section, setSection] = useState<Section | undefined>(undefined);
+
+  const {
+    categoriesStore: { setCategory },
+  } = useStore();
 
   const handleSectionChange = (s: Section) => {
     if (s === section) {
@@ -96,27 +103,25 @@ const Footer = () => {
             )}
           </FlexBetween>
           {(!isMobile || (isMobile && section === Section.Categories)) && (
-            <Box>
-              <Typography color="secondary.dark">Abdominal Corsets</Typography>
-              <Typography color="secondary.dark">
-                Ankle and Foot Bandages
-              </Typography>
-              <Typography color="secondary.dark">
-                Bandages for Shoulder and Elbow Joints
-              </Typography>
-              <Typography color="secondary.dark">
-                Arm Bandages and Splints
-              </Typography>
-              <Typography color="secondary.dark">
-                Children's Orthopedic Products
-              </Typography>
-              <Typography color="secondary.dark">
-                Elastic Bandages and Other Products
-              </Typography>
-              <Typography color="secondary.dark">
-                Nexus Adjustable Compression Products
-              </Typography>
-            </Box>
+            <>
+              {Object.entries(Category).map(([key, category]) => (
+                <Typography
+                  key={key}
+                  color="secondary.dark"
+                  onClick={() =>
+                    router
+                      .navigate("/categories")
+                      .then(() => setCategory(category))
+                      .then(() => window.scrollTo(0, 0))
+                  }
+                  sx={{
+                    cursor: "pointer",
+                  }}
+                >
+                  {category}
+                </Typography>
+              ))}
+            </>
           )}
         </Box>
         <Box flexBasis={isMobile ? undefined : "20%"}>

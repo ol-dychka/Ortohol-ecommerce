@@ -1,15 +1,23 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Formik } from "formik";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import RegisterForm from "./RegisterForm";
 import * as yup from "yup";
+import { CloseOutlined } from "@mui/icons-material";
 
 const LoginForm = () => {
   const {
     userStore: { login },
-    modalStore: { openModal },
+    modalStore: { openModal, closeModal },
   } = useStore();
   return (
     <Formik
@@ -36,6 +44,11 @@ const LoginForm = () => {
       }) => (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Box display="flex" flexDirection="column" gap="1rem">
+            <Box display="flex" justifyContent="end" marginBottom="-2rem">
+              <IconButton onClick={() => closeModal()}>
+                <CloseOutlined />
+              </IconButton>
+            </Box>
             <Typography variant="h3" textAlign="center">
               Log In to Ortohall
             </Typography>

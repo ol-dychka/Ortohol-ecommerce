@@ -24,9 +24,9 @@ const DefaultNavbar = ({ setCategory }: Props) => {
       <Box
         display="flex"
         alignItems="center"
-        gap="0.5rem"
+        gap="2rem"
         padding="0 4rem"
-        justifyContent="left"
+        justifyContent="space-between"
         bgcolor="white"
       >
         <Typography
@@ -40,12 +40,18 @@ const DefaultNavbar = ({ setCategory }: Props) => {
           ORTOHALL
         </Typography>
         <Searchbar />
-        <Divider orientation="vertical" sx={{ height: "1rem" }} />
-        <LikedIcon />
-        <Divider orientation="vertical" sx={{ height: "1rem" }} />
-        <ProfileIcon />
-        <Divider orientation="vertical" sx={{ height: "1rem" }} />
-        <CartIcon />
+        <Box
+          display="flex"
+          justifyContent="center"
+          gap="0.5rem"
+          alignItems="center"
+        >
+          <LikedIcon />
+          <Divider orientation="vertical" sx={{ height: "1rem" }} />
+          <ProfileIcon />
+          <Divider orientation="vertical" sx={{ height: "1rem" }} />
+          <CartIcon />
+        </Box>
       </Box>
 
       {/* BOTTOM NAVBAR */}
