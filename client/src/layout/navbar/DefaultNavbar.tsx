@@ -25,7 +25,7 @@ const DefaultNavbar = ({ setCategory }: Props) => {
         display="flex"
         alignItems="center"
         gap="2rem"
-        padding="0 4rem"
+        padding="0.5rem 4rem"
         justifyContent="space-between"
         bgcolor="white"
       >
@@ -33,7 +33,7 @@ const DefaultNavbar = ({ setCategory }: Props) => {
           variant="h3"
           fontWeight="500"
           color="primary.main"
-          margin="2rem 4rem"
+          margin="0 4rem"
           onClick={() => router.navigate("/")}
           sx={{ cursor: "pointer" }}
         >
@@ -60,7 +60,7 @@ const DefaultNavbar = ({ setCategory }: Props) => {
         display="flex"
         alignItems="center"
         gap="2rem"
-        padding="1.5rem 4rem"
+        padding="1rem 4rem"
         sx={{
           "& .MuiTypography-root": {
             color: "primary.contrastText",
@@ -85,7 +85,7 @@ const DefaultNavbar = ({ setCategory }: Props) => {
             sx={{ color: "primary.light", fontSize: "0.9rem" }}
           />
           {isCategoriesOpen && (
-            <Box position="absolute" top="3rem">
+            <Box position="absolute" top="2.5rem">
               <Box
                 display="flex"
                 flexDirection="column"

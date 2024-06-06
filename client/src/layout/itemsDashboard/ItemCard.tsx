@@ -63,6 +63,8 @@ const ItemCard = ({ item }: Props) => {
             src={item.images[0] || "/img-placeholder.png"}
             alt="img"
             width="200px"
+            height="200px"
+            style={{ objectFit: "contain" }}
           />
           <Box position="absolute" top="8%" right="8%">
             <IconButton onClick={() => setLiked(item, item.liked)}>

@@ -30,18 +30,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Abdominal Corsets",
                         Images = new List<Photo>{
                             new() {
                                 Id= "nae4jvgjog6uswrmfuf01",
-                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/nae4jvgjog6uswrmfuf0.jpg"
+                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683746/abdominal_binder_uuxu3w.jpg"
                             },
                         },
-                        Price = 9.99,
-                        PriceSale = 7.99,
+                        Price = 19.99,
+                        PriceSale = 17.99,
                     },
                     new() {
                         Name = "Maternity support belt",
@@ -51,18 +51,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
-                        Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
+                        Genders = new List<string>{ "Female"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Abdominal Corsets",
                         Images = new List<Photo>{
                             new() {
                                 Id= "nae4jvgjog6uswrmfuf02",
-                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/nae4jvgjog6uswrmfuf0.jpg"
+                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683762/maternity_support_belt_p4wggn.jpg"
                             },
                         },
-                        Price = 9.99,
-                        PriceSale = 7.99,
+                        Price = 19.99,
+                        PriceSale = 16.99,
                     },
                     new() {
                         Name = "Postpartum belly wrap",
@@ -72,18 +72,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Abdominal Corsets",
                         Images = new List<Photo>{
                             new() {
                                 Id= "nae4jvgjog6uswrmfuf04",
-                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/nae4jvgjog6uswrmfuf0.jpg"
+                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683772/Postpartum_belly_wrap_s9rlj9.jpg"
                             },
                         },
-                        Price = 9.99,
-                        PriceSale = 7.99,
+                        Price = 29.99,
                     },
                     new() {
                         Name = "Abdominal hernia belt",
@@ -93,18 +92,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Abdominal Corsets",
                         Images = new List<Photo>{
                             new() {
                                 Id= "nae4jvgjog6uswrmfuf03",
-                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/nae4jvgjog6uswrmfuf0.jpg"
+                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683746/Abdominal_hernia_belt_mgvikl.jpg"
                             },
                         },
-                        Price = 9.99,
-                        PriceSale = 7.99,
+                        Price = 32.99,
+                        PriceSale = 31.99,
                     },
                     new() {
                         Name = "Lumbar support belt",
@@ -114,18 +113,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Abdominal Corsets",
                         Images = new List<Photo>{
                             new() {
                                 Id= "nae4jvgjog6uswrmfuf05",
-                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/nae4jvgjog6uswrmfuf0.jpg"
+                                Url= "https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683761/Lumbar_support_belt_v2t0xk.jpg"
                             },
                         },
-                        Price = 9.99,
-                        PriceSale = 7.99,
+                        Price = 40.99,
                     },
                     // Ankle and Foot Bandages
                     new() {
@@ -136,17 +134,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Ankle and Foot Bandages",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t41",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683748/Ankle_brace_wrggac.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 13.99,
                     },
                     new() {
                         Name = "Compression socks",
@@ -156,17 +154,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Ankle and Foot Bandages",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t42",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683755/Compression_socks_mgigwi.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 12.99,
                     },
                     new() {
                         Name = "Plantar fasciitis night splint",
@@ -176,17 +174,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Ankle and Foot Bandages",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t43",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683770/Plantar_fasciitis_night_splint_n2bdgm.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 28.99,
                     },
                     new() {
                         Name = "Achilles tendon strap",
@@ -196,17 +194,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Ankle and Foot Bandages",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t44",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683747/Achilles_tendon_strap_fgfuhr.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 14.99,
                     },
                     new() {
                         Name = "Arch support inserts",
@@ -216,17 +214,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Ankle and Foot Bandages",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t4234",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683749/Arch_support_inserts_nqthtw.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 45.99,
+                        PriceSale = 41.99
                     },
                     // Bandages for Shoulder and Elbow Joints
                     new() {
@@ -237,17 +236,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Bandages for Shoulder and Elbow Joints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t45",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683773/Shoulder_immobilizer_jjikyr.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 34.99,
                     },
                     new() {
                         Name = "Elbow brace",
@@ -257,17 +256,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Bandages for Shoulder and Elbow Joints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t46",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683756/Elbow_brace_a3ccee.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 27.99,
                     },
                     new() {
                         Name = "Tennis elbow strap",
@@ -277,17 +276,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Bandages for Shoulder and Elbow Joints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t47",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683776/Tennis_elbow_strap_k67h2r.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 19.99,
                     },
                     new() {
                         Name = "Rotator cuff support",
@@ -297,17 +296,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Bandages for Shoulder and Elbow Joints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t48",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683772/Rotator_cuff_support_rduxwk.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 17.99,
                     },
                     new() {
                         Name = "Shoulder stability brace",
@@ -317,17 +316,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Bandages for Shoulder and Elbow Joints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t49",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683774/Shoulder_stability_brace_wwpvbj.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 24.99,
+                        PriceSale = 22.99,
                     },
                     // Arm Bandages and Splints
                     new() {
@@ -338,17 +338,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Arm Bandages and Splints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t410",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683750/Arm_sling_vlp9bu.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 31.99,
                     },
                     new() {
                         Name = "Forearm splint",
@@ -358,17 +358,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Arm Bandages and Splints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t411",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683758/Forearm_splint_zanhxj.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 32.99,
                     },
                     new() {
                         Name = "Tennis elbow brace",
@@ -378,17 +378,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Arm Bandages and Splints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t412",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683775/Tennis_elbow_brace_hward6.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 33.99,
                     },
                     new() {
                         Name = "Wrist support brace",
@@ -398,17 +398,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Arm Bandages and Splints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t413",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683777/Wrist_support_brace_y3nn5m.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 18.99,
                     },
                     new() {
                         Name = "Carpal tunnel splint",
@@ -418,17 +418,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Arm Bandages and Splints",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t414",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683751/Carpal_tunnel_splint_s1khgs.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 190.99,
+                        PriceSale = 175.99,
                     },
                     // Children's Orthopedic Products
                     new() {
@@ -439,17 +440,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Children's Orthopedic Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t415",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683768/Pediatric_knee_brace_vfjs4u.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 31.99,
                     },
                     new() {
                         Name = "Child-size ankle brace",
@@ -459,17 +460,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Children's Orthopedic Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t416",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683752/Child-size_ankle_brace_n8chlw.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 27.99,
                     },
                     new() {
                         Name = "Pediatric wrist splint",
@@ -479,17 +480,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Children's Orthopedic Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t417",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683770/Pediatric_wrist_splint_zcgww9.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 79.99,
                     },
                     new() {
                         Name = "Kids' posture corrector",
@@ -499,17 +500,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Children's Orthopedic Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t418",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683760/Kids_posture_corrector_mcfmbz.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 67.99,
                     },
                     new() {
                         Name = "Pediatric arm sling",
@@ -519,17 +520,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Children's Orthopedic Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t419",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683768/Pediatric_arm_sling_eglfln.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 15.99,
                     },
                     // Elastic Bandages and Other Products
                     new() {
@@ -540,17 +541,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Elastic Bandages and Other Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t420",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683754/Compression_bandage_yqtbat.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 13.99,
                     },
                     new() {
                         Name = "Kinesiology tape",
@@ -560,14 +561,14 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Elastic Bandages and Other Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t421",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683760/Kinesiology_tape_nghxft.jpg"
                             }
                         },
                         Price = 10.99,
@@ -580,17 +581,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Elastic Bandages and Other Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t422",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683753/Cohesive_bandage_wrap_etxzg0.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 11.99,
                     },
                     new() {
                         Name = "Elastic wrist wrap",
@@ -600,17 +601,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Elastic Bandages and Other Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t423",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683756/Elastic_wrist_wrap_kfsqzt.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 19.99,
                     },
                     new() {
                         Name = "Finger splint",
@@ -620,17 +621,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Elastic Bandages and Other Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t424",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683758/Finger_splint_wbtqgs.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 23.99,
                     },
                     // Nexus Adjustable Compression Products
                     new() {
@@ -641,17 +642,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Nexus Adjustable Compression Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t425",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683766/Nexus_Adjustable_Compression_Knee_Sleeve_kbztj6.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 56.99,
+                        PriceSale = 54.99,
                     },
                     new() {
                         Name = "Nexus Adjustable Compression Elbow Brace",
@@ -661,17 +663,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Nexus Adjustable Compression Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t426",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683765/Nexus_Adjustable_Compression_Elbow_Brace_fye4zb.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 47.99,
                     },
                     new() {
                         Name = "Nexus Adjustable Compression Ankle Support",
@@ -681,17 +683,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Nexus Adjustable Compression Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t427",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683763/Nexus_Adjustable_Compression_Ankle_Support_sfypic.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 39.99,
                     },
                     new() {
                         Name = "Nexus Adjustable Compression Wrist Wrap",
@@ -701,17 +703,18 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Nexus Adjustable Compression Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t428",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683767/Nexus_Adjustable_Compression_Wrist_Wrap_me64hs.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 41.99,
+                        PriceSale = 38.99,
                     },
                     new() {
                         Name = "Nexus Adjustable Compression Calf Sleeve",
@@ -721,17 +724,17 @@ namespace Persistence
                             Country = "Ukraine"
                         }),
                         Sizes = new List<string>{"Universal"},
-                        Colors = new List<string>{ "Black"},
+                        Colors = new List<string>{ "Black", "White", "Blue"},
                         Genders = new List<string>{ "Universal"},
-                        CompressionClasses = new List<string>{ "Without"},
+                        CompressionClasses = new List<string>{ "Without", "1st", "2nd"},
                         Category = "Nexus Adjustable Compression Products",
                         Images = new List<Photo>{
                             new() {
                                 Id="bf3azbrsdrpdcl2fd4t429",
-                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1695778366/bf3azbrsdrpdcl2fd4t4.jpg"
+                                Url="https://res.cloudinary.com/dhlhcn9vy/image/upload/v1717683764/Nexus_Adjustable_Compression_Calf_Sleeve_ks0qht.jpg"
                             }
                         },
-                        Price = 10.99,
+                        Price = 51.99,
                     },
                 };
                 await context.Items.AddRangeAsync(items);

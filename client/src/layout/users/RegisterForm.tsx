@@ -29,9 +29,15 @@ const RegisterForm = () => {
         error: null,
       }}
       onSubmit={(values, { setErrors }) =>
-        register(values).catch(() =>
-          setErrors({ error: "Invalid credentials" })
-        )
+        register(values).catch((error) => {
+          console.log(error);
+          if (error.response.data instanceof Object)
+            setErrors({
+              error:
+                "Password must include Lowercase, Uppercase, Digit and be 8-16 symbols",
+            });
+          else setErrors({ error: error.response.data });
+        })
       }
       validationSchema={yup.object({
         displayName: yup.string().required(),

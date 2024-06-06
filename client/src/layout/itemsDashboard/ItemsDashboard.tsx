@@ -39,6 +39,7 @@ const ItemsDashboard = () => {
             alt="main-banner"
             height="100%"
             width="100%"
+            style={{ borderRadius: "1rem" }}
           />
           <Box
             position="absolute"
@@ -59,7 +60,7 @@ const ItemsDashboard = () => {
         </Box>
       )}
 
-      <FlexBetween flexDirection={isMobile ? "column" : "row"}>
+      <FlexBetween flexDirection="column" mt="1rem">
         <Typography variant="h3">Recommended Items</Typography>
       </FlexBetween>
       {loading || !pagination ? (
