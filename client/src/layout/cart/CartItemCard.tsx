@@ -22,7 +22,7 @@ const CartItemCard = ({ cartItem }: Props) => {
       <img
         src={cartItem.item.images[0] || "/img-placeholder.png"}
         alt="img"
-        width="150px"
+        width="120px"
       />
       <Box flexBasis="40%">
         <FlexBetween>
@@ -32,86 +32,98 @@ const CartItemCard = ({ cartItem }: Props) => {
           </IconButton>
         </FlexBetween>
         <Box>
-          <Select
-            variant="standard"
-            fullWidth
-            value={cartItem.color}
-            onChange={(e) =>
-              updateCartOptions(
-                cartItem,
-                cartItem.size!,
-                e.target.value,
-                cartItem.gender!,
-                cartItem.compressionClass!
-              )
-            } //item, size, color, gender, compClass
-          >
-            {cartItem.item.colors.map((c) => (
-              <MenuItem key={c} value={c}>
-                {c}
-              </MenuItem>
-            ))}
-          </Select>
-          <Select
-            variant="standard"
-            fullWidth
-            value={cartItem.size}
-            onChange={(e) =>
-              updateCartOptions(
-                cartItem,
-                e.target.value,
-                cartItem.color!,
-                cartItem.gender!,
-                cartItem.compressionClass!
-              )
-            } //item, size, color, gender, compClass
-          >
-            {cartItem.item.sizes.map((s) => (
-              <MenuItem key={s} value={s}>
-                {s}
-              </MenuItem>
-            ))}
-          </Select>
-          <Select
-            variant="standard"
-            fullWidth
-            value={cartItem.gender}
-            onChange={(e) =>
-              updateCartOptions(
-                cartItem,
-                cartItem.size!,
-                cartItem.color!,
-                e.target.value,
-                cartItem.compressionClass!
-              )
-            } //item, size, color, gender, compClass
-          >
-            {cartItem.item.genders.map((s) => (
-              <MenuItem key={s} value={s}>
-                {s}
-              </MenuItem>
-            ))}
-          </Select>
-          <Select
-            variant="standard"
-            fullWidth
-            value={cartItem.compressionClass}
-            onChange={(e) =>
-              updateCartOptions(
-                cartItem,
-                cartItem.size!,
-                cartItem.color!,
-                cartItem.gender!,
-                e.target.value
-              )
-            } //item, size, color, gender, compClass
-          >
-            {cartItem.item.compressionClasses.map((s) => (
-              <MenuItem key={s} value={s}>
-                {s}
-              </MenuItem>
-            ))}
-          </Select>
+          <FlexBetween gap="1rem">
+            <Typography>Color</Typography>
+            <Select
+              variant="standard"
+              fullWidth
+              value={cartItem.color}
+              onChange={(e) =>
+                updateCartOptions(
+                  cartItem,
+                  cartItem.size!,
+                  e.target.value,
+                  cartItem.gender!,
+                  cartItem.compressionClass!
+                )
+              } //item, size, color, gender, compClass
+            >
+              {cartItem.item.colors.map((c) => (
+                <MenuItem key={c} value={c}>
+                  {c}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
+          <FlexBetween gap="1rem">
+            <Typography>Size</Typography>
+            <Select
+              variant="standard"
+              fullWidth
+              value={cartItem.size}
+              onChange={(e) =>
+                updateCartOptions(
+                  cartItem,
+                  e.target.value,
+                  cartItem.color!,
+                  cartItem.gender!,
+                  cartItem.compressionClass!
+                )
+              } //item, size, color, gender, compClass
+            >
+              {cartItem.item.sizes.map((s) => (
+                <MenuItem key={s} value={s}>
+                  {s}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
+          <FlexBetween gap="1rem">
+            <Typography>Gender</Typography>
+            <Select
+              variant="standard"
+              fullWidth
+              value={cartItem.gender}
+              onChange={(e) =>
+                updateCartOptions(
+                  cartItem,
+                  cartItem.size!,
+                  cartItem.color!,
+                  e.target.value,
+                  cartItem.compressionClass!
+                )
+              } //item, size, color, gender, compClass
+            >
+              {cartItem.item.genders.map((s) => (
+                <MenuItem key={s} value={s}>
+                  {s}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
+          <FlexBetween gap="1rem">
+            <Typography>Compression</Typography>
+            <Select
+              variant="standard"
+              fullWidth
+              value={cartItem.compressionClass}
+              onChange={(e) =>
+                updateCartOptions(
+                  cartItem,
+                  cartItem.size!,
+                  cartItem.color!,
+                  cartItem.gender!,
+                  e.target.value
+                )
+              } //item, size, color, gender, compClass
+            >
+              {cartItem.item.compressionClasses.map((s) => (
+                <MenuItem key={s} value={s}>
+                  {s}
+                </MenuItem>
+              ))}
+            </Select>
+          </FlexBetween>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center">
           <IconButton

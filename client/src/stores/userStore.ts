@@ -19,6 +19,7 @@ export default class userStore {
         } else {
           localStorage.removeItem("jwt");
         }
+        store.itemStore.loadItems();
       }
     );
 

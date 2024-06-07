@@ -118,7 +118,8 @@ const ItemPage = () => {
           </IconButton>
 
           {/* SIZE & COLOR CONFIG */}
-          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
+          <Typography>Color</Typography>
+          <ButtonGroup sx={{ marginBottom: "1rem", display: "block" }}>
             {item.colors.map((c) => (
               <Button
                 key={c}
@@ -129,7 +130,8 @@ const ItemPage = () => {
               </Button>
             ))}
           </ButtonGroup>
-          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
+          <Typography>Size</Typography>
+          <ButtonGroup sx={{ marginBottom: "1rem", display: "block" }}>
             {item.sizes.map((s) => (
               <Button
                 key={s}
@@ -140,7 +142,8 @@ const ItemPage = () => {
               </Button>
             ))}
           </ButtonGroup>
-          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
+          <Typography>Gender</Typography>
+          <ButtonGroup sx={{ marginBottom: "1rem", display: "block" }}>
             {item.genders.map((g) => (
               <Button
                 key={g}
@@ -151,7 +154,8 @@ const ItemPage = () => {
               </Button>
             ))}
           </ButtonGroup>
-          <ButtonGroup sx={{ marginTop: "1rem", display: "block" }}>
+          <Typography>Compression Class</Typography>
+          <ButtonGroup sx={{ marginBottom: "1rem", display: "block" }}>
             {item.compressionClasses.map((cc) => (
               <Button
                 key={cc}

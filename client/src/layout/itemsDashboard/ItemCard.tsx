@@ -31,6 +31,7 @@ const ItemCard = ({ item }: Props) => {
 
   const {
     itemStore: { addToCart, setLiked },
+    userStore: { isLoggedIn },
   } = useStore();
 
   const [quantity, setQuantity] = useState(1);
@@ -67,13 +68,15 @@ const ItemCard = ({ item }: Props) => {
             style={{ objectFit: "contain" }}
           />
           <Box position="absolute" top="8%" right="8%">
-            <IconButton onClick={() => setLiked(item, item.liked)}>
-              {item.liked ? (
-                <FavoriteOutlined color="primary" />
-              ) : (
-                <FavoriteBorderOutlined />
-              )}
-            </IconButton>
+            {isLoggedIn && (
+              <IconButton onClick={() => setLiked(item, item.liked)}>
+                {item.liked ? (
+                  <FavoriteOutlined color="primary" />
+                ) : (
+                  <FavoriteBorderOutlined />
+                )}
+              </IconButton>
+            )}
           </Box>
         </FlexBetween>
         <Typography

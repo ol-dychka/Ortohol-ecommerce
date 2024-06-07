@@ -18,14 +18,23 @@ import { CheckoutFormValues } from "../../models/CheckoutFormValues";
 
 const initialValues: CheckoutFormValues = {
   billingAddress: {
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
+    // for Preview purposes only
+    firstName: "John",
+    lastName: "Doe",
+    country: "Canada",
+    street1: "14-90 Greenwood St.",
     street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
+    city: "Toronto",
+    state: "ON",
+    zipCode: "U7H8J9",
+    // firstName: "",
+    // lastName: "",
+    // country: "",
+    // street1: "",
+    // street2: "",
+    // city: "",
+    // state: "",
+    // zipCode: "",
   },
   shippingAddress: {
     isSameAddress: true,
@@ -38,8 +47,10 @@ const initialValues: CheckoutFormValues = {
     state: "",
     zipCode: "",
   },
-  email: "",
-  phoneNumber: "",
+  email: "johndoe@email.com",
+  phoneNumber: "+12345678910",
+  // email: "",
+  // phoneNumber: "",
 };
 
 const checkoutSchema = [
@@ -150,7 +161,7 @@ const Checkout = () => {
               {activeStep === 0 && (
                 <Box>
                   <Box>
-                    <Typography>Billing Information</Typography>
+                    <Typography mb="1rem">Billing Information</Typography>
                     <AddressForm
                       type="billingAddress"
                       values={values.billingAddress}

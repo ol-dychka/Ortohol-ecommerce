@@ -89,7 +89,9 @@ const LikedIcon = () => {
               />
               <Typography
                 fontWeight="700"
-                onClick={() => router.navigate(`/items/${item.id}`)}
+                onClick={() =>
+                  router.navigate(`/items/${item.id}`).then(() => handleClose())
+                }
                 width="10rem"
                 noWrap
                 sx={{

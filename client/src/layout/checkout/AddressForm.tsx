@@ -33,7 +33,8 @@ const AddressForm = ({
         getIn(errors, formattedName(field))
     );
   const formattedHelper = (field: string) =>
-    getIn(touched, formattedName(field)) && getIn(errors, formattedName(field));
+    getIn(touched, formattedName(field)) &&
+    `${field.charAt(0).toUpperCase() + field.slice(1)} is Required`;
 
   return (
     <Box

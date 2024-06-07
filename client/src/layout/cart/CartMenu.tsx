@@ -62,7 +62,7 @@ const CartMenu = () => {
         position="fixed"
         right="0"
         bottom="0"
-        width="max(320px, 30%)"
+        width="min(520px, 100%)"
         height="100%"
         bgcolor="white"
         padding="1rem 2rem"
