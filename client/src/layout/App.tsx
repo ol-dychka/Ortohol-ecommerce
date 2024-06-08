@@ -19,6 +19,7 @@ function App() {
   const theme = createTheme(themeSettings());
 
   useEffect(() => {
+    // add items to cart when refreshing the page
     if (token) {
       getUser().finally(() => setAppLoaded());
       getLiked();

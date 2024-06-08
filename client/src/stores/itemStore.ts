@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Item } from "../models/Item";
 import api from "../api";
 import { CartItem } from "../models/CartItem";
@@ -7,12 +7,31 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Order, OrderItem } from "../models/OrderItem";
 import { Pagination, PagingParams } from "../models/Pagination";
 
+function getCartFromJson() {
+  const cartAsMap = new Map<string, CartItem>();
+  if (localStorage.getItem("cart")) {
+    const cartAsObject = JSON.parse(localStorage.getItem("cart")!);
+    for (const [key, value] of Object.entries(cartAsObject)) {
+      cartAsMap.set(
+        key,
+        new CartItem(value.item, value.quantity, {
+          size: value.size,
+          color: value.color,
+          gender: value.gender,
+          compressionClass: value.compressionClass,
+        })
+      );
+    }
+  }
+  return cartAsMap;
+}
+
 export default class itemStore {
   itemRegistry = new Map<string, Item>();
   loading = false;
   selectedItem: Item | undefined = undefined;
 
-  cartRegistry = new Map<string, CartItem>();
+  cartRegistry = getCartFromJson();
   isCartOpen = false;
   wasCartOpened = false;
 
@@ -27,6 +46,14 @@ export default class itemStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    reaction(
+      () => JSON.stringify(Object.fromEntries(this.cartRegistry!)),
+      (cartRegistry) => {
+        localStorage.setItem("cart", cartRegistry);
+        // console.log(cartRegistry);
+      }
+    );
   }
 
   get axiosParams() {
