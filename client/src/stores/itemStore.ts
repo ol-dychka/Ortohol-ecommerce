@@ -12,13 +12,14 @@ function getCartFromJson() {
   if (localStorage.getItem("cart")) {
     const cartAsObject = JSON.parse(localStorage.getItem("cart")!);
     for (const [key, value] of Object.entries(cartAsObject)) {
+      const v = value as CartItem;
       cartAsMap.set(
         key,
-        new CartItem(value.item, value.quantity, {
-          size: value.size,
-          color: value.color,
-          gender: value.gender,
-          compressionClass: value.compressionClass,
+        new CartItem(v.item, v.quantity, {
+          size: v.size,
+          color: v.color,
+          gender: v.gender,
+          compressionClass: v.compressionClass,
         })
       );
     }

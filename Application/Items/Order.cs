@@ -15,6 +15,8 @@ namespace Application.Items
         public class Command : IRequest<Result<StripeCheckoutSessionResult>>
         {
             public List<OrderItem> Items { get; set; }
+            public string SuccessUrl { get; set; }
+            public string FailureUrl { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<StripeCheckoutSessionResult>>
@@ -57,8 +59,8 @@ namespace Application.Items
 
                 var options = new SessionCreateOptions
                 {
-                    SuccessUrl = "http://bogkrovi-env.eba-gk3zcthi.us-east-2.elasticbeanstalk.com/success",
-                    CancelUrl = "http://bogkrovi-env.eba-gk3zcthi.us-east-2.elasticbeanstalk.com/failure",
+                    SuccessUrl = request.SuccessUrl,
+                    CancelUrl = request.FailureUrl,
                     PaymentMethodTypes = new List<string>{ "card" },
                     Mode = "payment",
                     LineItems = lineItems,

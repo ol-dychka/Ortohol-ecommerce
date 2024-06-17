@@ -23,9 +23,12 @@ namespace API.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<StripeCheckoutSessionResult>> Order(List<OrderItem> orderItems)
+        public async Task<ActionResult<StripeCheckoutSessionResult>> Order(OrderItems orderItems)
         {
-            return HandleResult(await Mediator.Send(new Application.Items.Order.Command { Items = orderItems }));
+            return HandleResult(await Mediator.Send(new Application.Items.Order.Command {
+                Items = orderItems.Items,
+                SuccessUrl = orderItems.SuccessUrl,
+                FailureUrl = orderItems.FailureUrl }));
         }
 
         [HttpGet("{category}/range")]

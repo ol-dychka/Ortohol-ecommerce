@@ -6,6 +6,7 @@ import { PaginatedResult } from "./models/Pagination";
 import PriceRange from "./models/PriceRange";
 import { User, UserFormValues } from "./models/User";
 import { store } from "./stores/store";
+import { OrderItems } from "./models/OrderItems";
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_URL;
 
@@ -86,8 +87,15 @@ const Items = {
   priceRange: (category: Category) =>
     requests.get<PriceRange>(`/items/${category}/range`),
   single: (id: string) => requests.get<Item>(`/items/${id}`),
-  order: (orderItems: OrderItem[]) =>
-    requests.post<StripeCheckoutSessionResult>(`/items`, orderItems),
+  order: (items: OrderItem[]) =>
+    requests.post<StripeCheckoutSessionResult>(
+      `/items`,
+      new OrderItems(
+        items,
+        `${window.location.origin}/success`,
+        `${window.location.origin}/failure`
+      )
+    ),
   orders: () => requests.get<Order[]>("/items/orders"),
   likes: () => requests.get<Item[]>("/items/likes"),
   like: (id: string) => requests.post(`/items/${id}/like`, {}),
