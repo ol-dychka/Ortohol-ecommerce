@@ -1,18 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  Divider,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Divider, Menu, MenuItem, Typography, useTheme } from "@mui/material";
 import { Close, PersonOutlined } from "@mui/icons-material";
 import React from "react";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import LoginForm from "../users/LoginForm";
 import { router } from "../Routes";
+import NavbarIconButton from "../../reusable/NavbarIconButton";
 
 const ProfileIcon = () => {
   const theme = useTheme();
@@ -32,7 +26,7 @@ const ProfileIcon = () => {
 
   return (
     <div>
-      <IconButton
+      <NavbarIconButton
         sx={{
           border: `0.25rem ${theme.palette.primary.main} solid`,
         }}
@@ -43,7 +37,7 @@ const ProfileIcon = () => {
         onClick={handleClick}
       >
         <PersonOutlined />
-      </IconButton>
+      </NavbarIconButton>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"

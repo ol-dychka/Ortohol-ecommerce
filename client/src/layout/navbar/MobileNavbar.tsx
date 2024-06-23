@@ -14,6 +14,7 @@ import CartIcon from "./CartIcon";
 import Searchbar from "./Searchbar";
 import LikedIcon from "./LikedIcon";
 import FlexBetween from "../../reusable/FlexBetween";
+import ProfileIcon from "./ProfileIcon";
 
 type Props = {
   setCategory: (category: Category) => void;
@@ -129,7 +130,7 @@ const MobileNavbar = ({ setCategory }: Props) => {
           display="flex"
           alignItems="center"
           justifyContent="space-evenly"
-          gap="1rem"
+          gap="0.5rem"
           padding="1.5rem 4rem"
           sx={{
             "& .MuiTypography-root": {
@@ -149,6 +150,7 @@ const MobileNavbar = ({ setCategory }: Props) => {
             <MenuOutlined />
           </IconButton>
           <LikedIcon />
+          <ProfileIcon />
           <CartIcon />
           <Searchbar />
         </Box>
