@@ -22,6 +22,7 @@ import { CartItem } from "../../models/CartItem";
 import ItemDetails from "./ItemDetails";
 import ItemImages from "./ItemImages";
 import { ItemOptions } from "../../models/Item";
+import LoadingSpinner from "../../reusable/LoadingSpinner";
 
 const ItemPage = () => {
   const {
@@ -74,7 +75,8 @@ const ItemPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, clearSelectedItem, loadItem]);
 
-  if (loading || !item) return <div>loading...</div>;
+  if (loading || !item) return <LoadingSpinner />;
+
   return (
     <Box>
       <Box

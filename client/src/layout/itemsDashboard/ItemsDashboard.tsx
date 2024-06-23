@@ -1,10 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  Box,
-  CircularProgress,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useEffect } from "react";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
@@ -13,6 +8,7 @@ import FlexBetween from "../../reusable/FlexBetween";
 import ItemCard from "./ItemCard";
 import { PagingParams } from "../../models/Pagination";
 import PaginationPanel from "../../reusable/PaginationPanel";
+import LoadingSpinner from "../../reusable/LoadingSpinner";
 
 const ItemsDashboard = () => {
   const isMobile = useMediaQuery("(max-width:900px)");
@@ -64,9 +60,7 @@ const ItemsDashboard = () => {
         <Typography variant="h3">Recommended Items</Typography>
       </FlexBetween>
       {loading || !pagination ? (
-        <Box height="900px" flex="center" alignItems="center" width="100%">
-          <CircularProgress />
-        </Box>
+        <LoadingSpinner />
       ) : (
         <>
           <Box

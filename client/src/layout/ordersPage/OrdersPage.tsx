@@ -1,10 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../stores/store";
-import { Box, CircularProgress, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
 import OrderCard from "./OrderCard";
 import { router } from "../Routes";
+import LoadingSpinner from "../../reusable/LoadingSpinner";
 
 const OrdersPage = () => {
   const {
@@ -26,9 +27,7 @@ const OrdersPage = () => {
       <Divider />
 
       {orderLoading ? (
-        <Box flex="center" alignItems="center" width="100%">
-          <CircularProgress />
-        </Box>
+        <LoadingSpinner />
       ) : (
         <Box>
           {orders.map((order) => (

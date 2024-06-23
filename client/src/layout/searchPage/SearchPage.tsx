@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import PaginationPanel from "../../reusable/PaginationPanel";
 import { PagingParams } from "../../models/Pagination";
+import LoadingSpinner from "../../reusable/LoadingSpinner";
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -33,7 +34,7 @@ const SearchPage = () => {
     return () => clearItems();
   }, [loadItems, searchWord, clearItems]);
 
-  if (loading) return <div>loading...</div>;
+  if (loading) return <LoadingSpinner />;
 
   return (
     <Box>

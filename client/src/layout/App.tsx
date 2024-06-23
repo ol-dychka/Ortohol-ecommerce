@@ -9,6 +9,7 @@ import ModalContainer from "../reusable/ModalContainer";
 import { useStore } from "../stores/store";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import LoadingSpinner from "../reusable/LoadingSpinner";
 
 function App() {
   const {
@@ -28,7 +29,7 @@ function App() {
     }
   }, [token, getUser, getLiked, appLoaded, setAppLoaded]);
 
-  if (!appLoaded) return <Box>loading...</Box>;
+  if (!appLoaded) return <LoadingSpinner />;
 
   return (
     <ThemeProvider theme={theme}>

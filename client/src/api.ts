@@ -10,6 +10,12 @@ import { OrderItems } from "./models/OrderItems";
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_URL;
 
+const sleep = (delay: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+};
+
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 axios.interceptors.request.use((config) => {
@@ -20,7 +26,7 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(
   async (response) => {
-    // if (import.meta.env.DEV) await sleep(1000);
+    if (import.meta.env.DEV) await sleep(1000);
     const pagination = response.headers["pagination"];
     if (pagination) {
       response.data = new PaginatedResult(

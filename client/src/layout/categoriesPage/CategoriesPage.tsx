@@ -10,6 +10,7 @@ import { Category } from "../../models/Item";
 import CategoryButton from "./CategoryButton";
 import PriceRange from "../../models/PriceRange";
 import PaginationPanel from "../../reusable/PaginationPanel";
+import LoadingSpinner from "../../reusable/LoadingSpinner";
 
 const CategoriesPage = () => {
   const isMobile = useMediaQuery("(max-width:900px)");
@@ -93,7 +94,7 @@ const CategoriesPage = () => {
       </Box>
       <Box gridColumn="span 3">
         {loading ? (
-          <Box p="10rem">loading...</Box>
+          <LoadingSpinner />
         ) : (
           <>
             <Typography color="#000">{category}</Typography>

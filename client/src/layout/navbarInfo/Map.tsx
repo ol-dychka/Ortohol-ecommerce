@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { useMemo } from "react";
+import LoadingSpinner from "../../reusable/LoadingSpinner";
 
 const Map = () => {
   const { isLoaded } = useLoadScript({
@@ -11,7 +12,7 @@ const Map = () => {
     []
   );
 
-  if (!isLoaded) return <div>loading...</div>;
+  if (!isLoaded) return <LoadingSpinner />;
   return (
     <Box>
       <Typography variant="h2" color="primary.main">
